@@ -6,11 +6,13 @@ import NewWords from "./components/NewWords";
 
 const App = () => {
   return (
-    <div className="">
-      <Aboveall />
-      <Topbar />
-      <CardX />
-      <NewWords />
+    <div>
+      <div className=" ">
+        <Aboveall />
+        <Topbar />
+        <CardX className="" />
+        <NewWords />
+      </div>
     </div>
   );
 };
