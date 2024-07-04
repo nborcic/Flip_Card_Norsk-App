@@ -1,0 +1,46 @@
+{
+  "levels": {
+    "basic": [
+      {
+        "word": "apple",
+        "translation": "eple",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "house",
+        "translation": "hus",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      }
+    ],
+    "intermediate": [
+      {
+        "word": "computer",
+        "translation": "datamaskin",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "beautiful",
+        "translation": "vakker",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      }
+    ],
+    "advanced": [
+      {
+        "word": "serendipity",
+        "translation": "serendipitet",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "conundrum",
+        "translation": "gåte",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      }
+    ]
+  }
+}

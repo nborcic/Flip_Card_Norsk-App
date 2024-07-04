@@ -7,10 +7,10 @@ import NewWords from "./components/NewWords";
 const App = () => {
   return (
     <div>
-      <div className=" ">
+      <div>
         <Aboveall />
         <Topbar />
-        <CardX className="" />
+        <CardX />
         <NewWords />
       </div>
     </div>

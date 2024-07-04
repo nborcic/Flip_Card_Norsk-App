@@ -8,16 +8,18 @@ export default function IconButtonMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
+    console.log("IconButton clicked");
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+    console.log("Menu closed");
     setAnchorEl(null);
   };
 
   return (
     <div>
-      <IconButton
+      <IconButton overlay="none"
         sx={{
           backgroundColor: "white",
           "&:hover": {
