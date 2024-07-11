@@ -2,7 +2,7 @@ import React from "react";
 
 const NewWords = () => {
   return (
-    <div className="flex justify-center items-center rounded bg-blue-300 p-2 m-2 border flex-col border-black">
+    <div className="flex justify-center items-center rounded bg-blue-300 p-2  border flex-col border-black">
       <section className="mb-2">
         <p className="font-bold">New word One</p>
         <p>Definition</p>

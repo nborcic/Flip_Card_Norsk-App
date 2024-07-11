@@ -12,6 +12,30 @@
         "translation": "hus",
         "language": "Norwegian",
         "flag": "NO_flag.webp"
+      },
+      {
+        "word": "cat",
+        "translation": "katt",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "dog",
+        "translation": "hund",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "water",
+        "translation": "vann",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "food",
+        "translation": "mat",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
       }
     ],
     "intermediate": [
@@ -26,6 +50,30 @@
         "translation": "vakker",
         "language": "Norwegian",
         "flag": "NO_flag.webp"
+      },
+      {
+        "word": "friendship",
+        "translation": "vennskap",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "mountain",
+        "translation": "fjell",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "happiness",
+        "translation": "lykke",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "travel",
+        "translation": "reise",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
       }
     ],
     "advanced": [
@@ -38,6 +86,30 @@
       {
         "word": "conundrum",
         "translation": "gåte",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "philosophy",
+        "translation": "filosofi",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "perception",
+        "translation": "oppfatning",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "ephemeral",
+        "translation": "flyktig",
+        "language": "Norwegian",
+        "flag": "NO_flag.webp"
+      },
+      {
+        "word": "eloquence",
+        "translation": "veltalighet",
         "language": "Norwegian",
         "flag": "NO_flag.webp"
       }
