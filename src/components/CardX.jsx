@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
 import "./CardX.css";
+import flags from "/public/flags.json";
 import wordData from "/public/words.json";
 
 const CardX = () => {
@@ -57,7 +58,7 @@ const CardX = () => {
             <p className="text-white text-2xl h-24">Here comes the word</p>
             <p className="text-4xl font-bold p-4">{currentWord.word}</p>
             <img
-              src={"GB_flag.webp"}
+              src={flags.EN.path}
               className="h-16 w-16"
               alt="Language Flag"
             />
@@ -71,7 +72,7 @@ const CardX = () => {
             <p className="text-white text-2xl h-24">Here comes the word</p>
             <p className="text-4xl font-bold p-4">{currentWord.translation}</p>
             <img
-              src={`/public/${currentWord.flag}`}
+              src={flags.NO.path}
               className="h-16 w-16"
               alt="Norwegian Flag"
             />
