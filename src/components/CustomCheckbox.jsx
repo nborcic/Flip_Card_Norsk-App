@@ -11,7 +11,7 @@ export default function CustomCheckbox({ setLevel }) {
     const { value } = event.target;
     setSelectedLevel(value);
     setLevel(value);
-    console.log();
+    
   };
   return (
     <div>
