@@ -4,17 +4,17 @@ import "./CardX.css";
 import flags from "/public/flags.json";
 import wordData from "/public/words.json";
 
-const CardX = () => {
+const CardX = ({ level }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [words, setWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentWord, setCurrentWord] = useState({});
-  const [level, setLevel] = useState("basic");
 
   useEffect(() => {
     const levelWords = wordData.levels[level];
     setWords(levelWords);
     setCurrentWord(levelWords[0]);
+    setCurrentIndex(0);
   }, [level]);
 
   const handleFlip = () => {
