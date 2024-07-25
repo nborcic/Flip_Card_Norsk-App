@@ -1,0 +1,237 @@
+[
+  {
+    "word": "tree",
+    "definition": "A perennial plant with a trunk and branches.",
+    "variations": ["tre", "arboreal", "wood"]
+  },
+  {
+    "word": "book",
+    "definition": "A set of written or printed pages, bound together.",
+    "variations": ["bok", "volume", "tome"]
+  },
+  {
+    "word": "sun",
+    "definition": "The star at the center of the solar system.",
+    "variations": ["sol", "solar", "helios"]
+  },
+  {
+    "word": "moon",
+    "definition": "The natural satellite of the Earth.",
+    "variations": ["måne", "lunar", "satellite"]
+  },
+  {
+    "word": "star",
+    "definition": "A luminous point in the night sky.",
+    "variations": ["stjerne", "stellar", "celestial body"]
+  },
+  {
+    "word": "car",
+    "definition": "A road vehicle, typically with four wheels, powered by an internal combustion engine or electric motor.",
+    "variations": ["bil", "automobile", "vehicle"]
+  },
+  {
+    "word": "bike",
+    "definition": "A two-wheeled vehicle that you sit on and move by turning the two pedals.",
+    "variations": ["sykkel", "bicycle", "cycle"]
+  },
+  {
+    "word": "bus",
+    "definition": "A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route.",
+    "variations": ["buss", "coach", "shuttle"]
+  },
+  {
+    "word": "train",
+    "definition": "A series of connected vehicles traveling on railways.",
+    "variations": ["tog", "locomotive", "railcar"]
+  },
+  {
+    "word": "plane",
+    "definition": "A powered flying vehicle with fixed wings and a weight greater than that of the air it displaces.",
+    "variations": ["fly", "airplane", "jet"]
+  },
+  {
+    "word": "boat",
+    "definition": "A small vessel for traveling over water, propelled by oars, sails, or an engine.",
+    "variations": ["båt", "vessel", "craft"]
+  },
+  {
+    "word": "shoe",
+    "definition": "A covering for the foot, typically made of leather, with a sturdy sole and not reaching above the ankle.",
+    "variations": ["sko", "footwear", "boot"]
+  },
+  {
+    "word": "hat",
+    "definition": "A shaped covering for the head worn for warmth, as a fashion item, or as part of a uniform.",
+    "variations": ["hatt", "cap", "headgear"]
+  },
+  {
+    "word": "coat",
+    "definition": "An outer garment with sleeves, typically extending below the hips.",
+    "variations": ["kåpe", "jacket", "overcoat"]
+  },
+  {
+    "word": "shirt",
+    "definition": "A garment for the upper body made of cotton or a similar fabric, with a collar, sleeves, and buttons down the front.",
+    "variations": ["skjorte", "blouse", "top"]
+  },
+  {
+    "word": "trousers",
+    "definition": "An outer garment covering the body from the waist to the ankles, with a separate part for each leg.",
+    "variations": ["bukser", "pants", "slacks"]
+  },
+  {
+    "word": "dress",
+    "definition": "A one-piece garment for a woman or girl that covers the body and extends down over the legs.",
+    "variations": ["kjole", "gown", "frock"]
+  },
+  {
+    "word": "milk",
+    "definition": "A white nutritious liquid produced by the mammary glands of mammals.",
+    "variations": ["melk", "dairy", "lactate"]
+  },
+  {
+    "word": "bread",
+    "definition": "A food made of flour, water, and yeast or another leavening agent, mixed together and baked.",
+    "variations": ["brød", "loaf", "bake"]
+  },
+  {
+    "word": "cheese",
+    "definition": "A food made from the pressed curds of milk.",
+    "variations": ["ost", "curd", "dairy product"]
+  },
+  {
+    "word": "butter",
+    "definition": "A pale yellow edible fatty substance made by churning cream and used as a spread or in cooking.",
+    "variations": ["smør", "margarine", "spread"]
+  },
+  {
+    "word": "egg",
+    "definition": "An oval or round object laid by a female bird, reptile, fish, or invertebrate, usually containing a developing embryo.",
+    "variations": ["egg", "ovum", "hatch"]
+  },
+  {
+    "word": "sugar",
+    "definition": "A sweet crystalline substance obtained from various plants, especially sugar cane and sugar beet.",
+    "variations": ["sukker", "sweetener", "glucose"]
+  },
+  {
+    "word": "salt",
+    "definition": "A white crystalline substance which gives seawater its characteristic taste and is used for seasoning or preserving food.",
+    "variations": ["salt", "sodium chloride", "seasoning"]
+  },
+  {
+    "word": "pepper",
+    "definition": "A pungent hot-tasting powder prepared from dried and ground peppercorns, used as a spice or condiment to flavor food.",
+    "variations": ["pepper", "spice", "seasoning"]
+  },
+  {
+    "word": "table",
+    "definition": "A piece of furniture with a flat top and one or more legs, providing a level surface on which objects may be placed.",
+    "variations": ["bord", "desk", "counter"]
+  },
+  {
+    "word": "chair",
+    "definition": "A separate seat for one person, typically with a back and four legs.",
+    "variations": ["stol", "seat", "bench"]
+  },
+  {
+    "word": "bed",
+    "definition": "A piece of furniture for sleep or rest, typically a framework with a mattress.",
+    "variations": ["seng", "cot", "bunk"]
+  },
+  {
+    "word": "window",
+    "definition": "An opening in the wall or roof of a building or vehicle that is fitted with glass or other transparent material to allow light or air to enter and people to see out.",
+    "variations": ["vindu", "pane", "casement"]
+  },
+  {
+    "word": "door",
+    "definition": "A hinged, sliding, or revolving barrier at the entrance to a building, room, or vehicle, or in the framework of a cupboard.",
+    "variations": ["dør", "portal", "entryway"]
+  },
+  {
+    "word": "garden",
+    "definition": "A piece of ground, often near a house, used for growing flowers, fruit, or vegetables.",
+    "variations": ["hage", "yard", "plot"]
+  },
+  {
+    "word": "flower",
+    "definition": "The seed-bearing part of a plant, consisting of reproductive organs (stamens and carpels) that are typically surrounded by a brightly colored corolla (petals) and a green calyx (sepals).",
+    "variations": ["blomst", "blossom", "bloom"]
+  },
+  {
+    "word": "grass",
+    "definition": "Vegetation consisting of typically short plants with long, narrow leaves, growing wild or cultivated on lawns and pasture, and as a fodder crop.",
+    "variations": ["gress", "turf", "sward"]
+  },
+  {
+    "word": "bird",
+    "definition": "A warm-blooded egg-laying vertebrate distinguished by the possession of feathers, wings, and a beak and (typically) by being able to fly.",
+    "variations": ["fugl", "avian", "winged"]
+  },
+  {
+    "word": "fish",
+    "definition": "A limbless cold-blooded vertebrate animal with gills and fins and living wholly in water.",
+    "variations": ["fisk", "marine", "aquatic"]
+  },
+  {
+    "word": "horse",
+    "definition": "A large plant-eating domesticated mammal with solid hoofs and a flowing mane and tail, used for riding, racing, and to carry and pull loads.",
+    "variations": ["hest", "equine", "steed"]
+  },
+  {
+    "word": "cow",
+    "definition": "A fully grown female animal of a domesticated breed of ox, kept to produce milk or beef.",
+    "variations": ["ku", "bovine", "heifer"]
+  },
+  {
+    "word": "sheep",
+    "definition": "A domesticated ruminant animal with a thick woolly coat and (typically only in the male) curving horns. It is kept in flocks for its wool or meat, and is proverbial for its tendency to follow others in the flock.",
+    "variations": ["sau", "ovine", "lamb"]
+  },
+  {
+    "word": "pig",
+    "definition": "An omnivorous domesticated hoofed mammal with sparse bristly hair and a flat snout for rooting in the soil, kept for its meat.",
+    "variations": ["gris", "swine", "hog"]
+  },
+  {
+    "word": "goat",
+    "definition": "A hardy domesticated ruminant animal that has backward curving horns and (in the male) a beard. It is kept for its milk and meat, and noted for its lively behavior.",
+    "variations": ["geit", "caprine", "kid"]
+  },
+  {
+    "word": "chicken",
+    "definition": "A domestic fowl kept for its eggs or meat, especially a young one.",
+    "variations": ["kylling", "poultry", "hen"]
+  },
+  {
+    "word": "duck",
+    "definition": "A waterbird with a broad blunt bill, short legs, webbed feet, and a waddling gait.",
+    "variations": ["and", "waterfowl", "drake"]
+  },
+  {
+    "word": "goose",
+    "definition": "A large waterbird with a long neck, short legs, webbed feet, and a short broad bill.",
+    "variations": ["gås", "gander", "waterfowl"]
+  },
+  {
+    "word": "turkey",
+    "definition": "A large mainly domesticated game bird native to North America, having a bald head and (in the male) red wattles.",
+    "variations": ["kalkun", "gobbler", "poultry"]
+  },
+  {
+    "word": "fruit",
+    "definition": "The sweet and fleshy product of a tree or other plant that contains seed and can be eaten as food.",
+    "variations": ["frukt", "produce", "harvest"]
+  },
+  {
+    "word": "vegetable",
+    "definition": "A plant or part of a plant used as food, such as a cabbage, potato, turnip, or bean.",
+    "variations": ["grønnsak", "greens", "produce"]
+  },
+  {
+    "word": "meat",
+    "definition": "The flesh of an animal (especially a mammal) as food.",
+    "variations": ["kjøtt", "flesh", "protein"]
+  }
+]
