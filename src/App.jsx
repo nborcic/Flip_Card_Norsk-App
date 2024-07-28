@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <div>
-      <div>
+      <div className="shadow m-2">
         <Aboveall />
         <Topbar setLevel={setLevel} />
         <CardX level={level} />
