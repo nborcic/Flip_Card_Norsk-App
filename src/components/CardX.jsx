@@ -41,22 +41,23 @@ const CardX = ({ level }) => {
     <div className="rounded flex justify-center items-center h-[400px] border border-black">
       <div className="flex flex-row items-center h-[40vh]">
         <div
-          className="PREVIOUS WORD border [writing-mode:vertical-rl] rotate-180 flex justify-center font-bold rounded p-2 cursor-pointer h-[100%]"
+          className="PREVIOUS WORD border [writing-mode:vertical-rl] rotate-180 flex justify-center font-bold rounded p-2 cursor-pointer h-[100%] md:w-[100px] md:justify-center md:items-center"
           onClick={handlePrevious}
         >
-          <span className="font-bold">˄</span>
+          <span className="font-bold previus_div ">˄</span>
           Previous word
         </div>
 
         <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
           <div
-            className="card text-black p-4 rounded flex flex-col items-center justify-center"
+            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px]"
             onClick={handleFlip}
-            style={{ width: "300px", height: "200px" }}
           >
             <h1 className="text-lg font-anton">English</h1>
             <p className="text-white text-2xl h-24">Here comes the word</p>
-            <p className="text-4xl font-bold p-4">{currentWord.word}</p>
+            <p className="text-4xl font-bold p-4 md:text-5xl md:justify-center md:items-center">
+              {currentWord.word}
+            </p>
             <img
               src={flags.EN.path}
               className="h-16 w-16"
@@ -64,9 +65,8 @@ const CardX = ({ level }) => {
             />
           </div>
           <div
-            className="card text-black p-4 rounded flex flex-col items-center justify-center"
+            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px]"
             onClick={handleFlip}
-            style={{ width: "300px", height: "200px" }}
           >
             <h1 className="text-lg">Norwegian</h1>
             <p className="text-white text-2xl h-24">Here comes the word</p>
@@ -80,7 +80,7 @@ const CardX = ({ level }) => {
         </ReactCardFlip>
 
         <div
-          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] p-2 flex justify-center cursor-pointer"
+          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] p-2 flex justify-center cursor-pointer md:w-[100px] md:justify-center md:items-center"
           onClick={handleNext}
         >
           Next word <span className="font-bold">˄</span>

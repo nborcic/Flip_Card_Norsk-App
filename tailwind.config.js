@@ -8,7 +8,12 @@ export default {
     extend: {
       backgroundImage: {
         'radial-orange-yellow': 'radial-gradient(circle, #FFA500, #FFFF00, #FFA500)',
-      }
+      },
+      screens: {
+        'sm': '430px',  // Mobile
+        'md': '750px',  // Tablet
+      },
+
     }
   },
   plugins: [],
