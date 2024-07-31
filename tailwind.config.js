@@ -10,8 +10,11 @@ export default {
         'radial-orange-yellow': 'radial-gradient(circle, #FFA500, #FFFF00, #FFA500)',
       },
       screens: {
-        'sm': '430px',  // Mobile
-        'md': '750px',  // Tablet
+
+        's': '319px',
+        'm': '374px',
+        'l': '424px',
+
       },
 
     }

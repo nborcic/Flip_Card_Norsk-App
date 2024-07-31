@@ -13,11 +13,21 @@ export default function CustomCheckbox({ setLevel }) {
     setLevel(value);
   };
   return (
-    <div>
+    <div
+      className="s:pt-2 s:flex-col
+    
+
+    "
+    >
       <Box>
         <FormControlLabel
           control={
             <Checkbox
+              sx={{
+                "&.Mui-checked": {
+                  color: "blue",
+                },
+              }}
               checked={selectedLevel === "basic"}
               onChange={handleChange}
               value="basic"
@@ -29,6 +39,11 @@ export default function CustomCheckbox({ setLevel }) {
         <FormControlLabel
           control={
             <Checkbox
+              sx={{
+                "&.Mui-checked": {
+                  color: "green",
+                },
+              }}
               checked={selectedLevel === "intermediate"}
               onChange={handleChange}
               value="intermediate"
@@ -40,6 +55,12 @@ export default function CustomCheckbox({ setLevel }) {
         <FormControlLabel
           control={
             <Checkbox
+              sx={{
+                "&.Mui-checked": {
+                  color: "red",
+                  flexDirection: "column",
+                },
+              }}
               checked={selectedLevel === "advanced"}
               onChange={handleChange}
               value="advanced"

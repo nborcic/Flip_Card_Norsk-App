@@ -9,7 +9,7 @@ const Aboveall = () => {
         className="rounded-xl h-[50px] w-[50px]"
         alt="userIcon"
       />
-      <p className="font-mono font-bold text-xl">Flip To Know</p>
+      <p className="font-mono font-bold text-xl s:text-s">Flip To Know</p>
 
       <IconButtonMenu />
     </div>

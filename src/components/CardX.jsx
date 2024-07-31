@@ -41,7 +41,7 @@ const CardX = ({ level }) => {
     <div className="rounded flex justify-center items-center h-[400px] border border-black">
       <div className="flex flex-row items-center h-[40vh]">
         <div
-          className="PREVIOUS WORD border [writing-mode:vertical-rl] rotate-180 flex justify-center font-bold rounded p-2 cursor-pointer h-[100%] md:w-[100px] md:justify-center md:items-center"
+          className="PREVIOUS WORD border [writing-mode:vertical-rl] rotate-180 flex justify-center font-bold rounded p-2 cursor-pointer h-[100%] l:w-[50px] s:w-[50px] md:w-[100px] md:justify-center md:items-center"
           onClick={handlePrevious}
         >
           <span className="font-bold previus_div ">˄</span>
@@ -50,12 +50,20 @@ const CardX = ({ level }) => {
 
         <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
           <div
-            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px]"
+            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh]
+            {level === 'advanced'? 'w-[300px]' : w-[250px]}
+            "
             onClick={handleFlip}
           >
-            <h1 className="text-lg font-anton">English</h1>
-            <p className="text-white text-2xl h-24">Here comes the word</p>
-            <p className="text-4xl font-bold p-4 md:text-5xl md:justify-center md:items-center">
+            <h1 className="text-lg font-anton m:text-xl">English</h1>
+            <p className="text-white text-2xl h-24 m:text-xs ">
+              Here comes the word
+            </p>
+            <p
+              className={`${
+                level === "advanced" ? "text-xl" : "text-4xl"
+              } font-bold p-4 l:text-4xl justify-center items-center`}
+            >
               {currentWord.word}
             </p>
             <img
@@ -65,12 +73,18 @@ const CardX = ({ level }) => {
             />
           </div>
           <div
-            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px]"
+            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh]"
             onClick={handleFlip}
           >
             <h1 className="text-lg">Norwegian</h1>
             <p className="text-white text-2xl h-24">Here comes the word</p>
-            <p className="text-4xl font-bold p-4">{currentWord.translation}</p>
+            <p
+              className={`${
+                level === "advanced" ? "text-xl" : "text-4xl"
+              } font-bold p-4 l:text-4xl justify-center items-center`}
+            >
+              {currentWord.translation}
+            </p>
             <img
               src={flags.NO.path}
               className="h-16 w-16"
