@@ -3,22 +3,21 @@ import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
-export default function CustomCheckbox({ setLevel }) {
+const CustomCheckbox = ({ setLevel }) => {
   const [selectedLevel, setSelectedLevel] = useState("basic");
+
+  const isSmallScreen = useMediaQuery("(max-width:375px)");
 
   const handleChange = (event) => {
     const { value } = event.target;
     setSelectedLevel(value);
     setLevel(value);
   };
-  return (
-    <div
-      className="s:pt-2 s:flex-col
-    
 
-    "
-    >
+  return (
+    <div className="s:pt-2 s:flex-col">
       <Box>
         <FormControlLabel
           control={
@@ -33,7 +32,15 @@ export default function CustomCheckbox({ setLevel }) {
               value="basic"
             />
           }
-          label="Basic"
+          label={
+            isSmallScreen ? (
+              <div className="flex flex-row">
+                <img src="src/mdi--arm-flex.svg" alt="Basic" />
+              </div>
+            ) : (
+              "Basic"
+            )
+          }
         />
 
         <FormControlLabel
@@ -49,7 +56,16 @@ export default function CustomCheckbox({ setLevel }) {
               value="intermediate"
             />
           }
-          label="Intermediate"
+          label={
+            isSmallScreen ? (
+              <div className="flex flex-row">
+                <img src="src/mdi--arm-flex.svg" alt="Basic" />
+                <img src="src/mdi--arm-flex.svg" alt="Basic" />
+              </div>
+            ) : (
+              "Basic"
+            )
+          }
         />
 
         <FormControlLabel
@@ -66,7 +82,17 @@ export default function CustomCheckbox({ setLevel }) {
               value="advanced"
             />
           }
-          label="Advanced"
+          label={
+            isSmallScreen ? (
+              <div className="flex flex-row ">
+                <img src="src/mdi--arm-flex.svg" alt="Basic" />
+                <img src="src/mdi--arm-flex.svg" alt="Basic" />
+                <img src="src/mdi--arm-flex.svg" alt="Basic" />
+              </div>
+            ) : (
+              "Basic"
+            )
+          }
           sx={{
             "&.Mui-focused": {
               outline: "2px solid blue",
@@ -76,4 +102,6 @@ export default function CustomCheckbox({ setLevel }) {
       </Box>
     </div>
   );
-}
+};
+
+export default CustomCheckbox;

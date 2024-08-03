@@ -27,9 +27,11 @@ const NewWords = () => {
   return (
     <div>
       <div className="flex justify-center items-center rounded bg-blue-300 p-2  border flex-col border-black">
-      <br />
+        <br />
         <section className="mb-2">
-          <p className="font-bold text-xl flex justify-center items-center">{word}</p>
+          <p className="font-bold text-xl flex justify-center items-center">
+            {word}
+          </p>
           <p className="flex justify-center items-center w-[80vw]">{def}</p>
         </section>
         <section>
@@ -39,7 +41,9 @@ const NewWords = () => {
         </section>
         <br />
         <section className="mb-2">
-          <p className="font-bold text-xl flex justify-center items-center">{wordd}</p>
+          <p className="font-bold text-xl flex justify-center items-center">
+            {wordd}
+          </p>
           <p className="flex justify-center items-center w-[80vw]">{deff}</p>
         </section>
         <section>
@@ -49,7 +53,9 @@ const NewWords = () => {
         </section>
         <br />
         <section className="mb-2">
-          <p className="font-bold text-xl flex justify-center items-center">{worddd}</p>
+          <p className="font-bold text-xl flex justify-center items-center">
+            {worddd}
+          </p>
           <p className="flex justify-center items-center w-[80vw]">{defff}</p>
         </section>
         <section>
