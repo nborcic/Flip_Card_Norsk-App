@@ -17,7 +17,7 @@ const CustomCheckbox = ({ setLevel }) => {
   };
 
   return (
-    <div className="s:pt-2 s:flex-col">
+    <div className="s:pt-2 s:flex-col ">
       <Box>
         <FormControlLabel
           control={

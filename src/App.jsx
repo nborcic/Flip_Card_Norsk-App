@@ -9,8 +9,8 @@ const App = () => {
   const [level, setLevel] = useState("basic");
 
   return (
-    <div>
-      <div className="shadow m-2">
+    <div className="flex justify-center items-center bg-blue-50">
+      <div className="shadow m-2 max-w-[760px] bg-blue-100">
         <Aboveall />
         <Topbar setLevel={setLevel} />
         <CardX level={level} />

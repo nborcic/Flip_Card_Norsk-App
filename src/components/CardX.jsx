@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
 import "./CardX.css";
-import flags from "/public/flags.json";
-import wordData from "/public/words.json";
+import flags from "../Assets/flags.json";
+console.log(flags);
+import wordData from "../Assets/words.json";
 
 const CardX = ({ level }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -38,10 +39,10 @@ const CardX = ({ level }) => {
   };
 
   return (
-    <div className="rounded flex justify-center items-center h-[400px] border border-black">
+    <div className="rounded flex justify-center items-center bg-blue-100 h-[400px] border border-black">
       <div className="flex flex-row items-center h-[40vh]">
         <div
-          className="PREVIOUS WORD border [writing-mode:vertical-rl] rotate-180 flex justify-center font-bold rounded p-2 cursor-pointer h-[100%] l:w-[50px] s:w-[50px] md:w-[100px] "
+          className="PREVIOUS WORD [writing-mode:vertical-rl] rotate-180 border font-bold rounded h-[100%] p-2 flex justify-center cursor-pointer md:w-[100px] md:justify-center md:items-center xl:h-[20vw] "
           onClick={handlePrevious}
         >
           <span className="font-bold previus_div ">˄</span>
@@ -51,12 +52,12 @@ const CardX = ({ level }) => {
         <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
           <div
             className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh]
-            
+            bg-blue-100
             "
             onClick={handleFlip}
           >
             <h1 className="text-lg font-anton m:text-xl m:w-[60vw]">English</h1>
-            <p className="text-white text-2xl h-24 m:text-xs">
+            <p className="text-blue-100 text-2xl h-24 m:text-xs">
               Here comes the word
             </p>
             <p
@@ -67,17 +68,17 @@ const CardX = ({ level }) => {
               {currentWord.word}
             </p>
             <img
-              src={flags.EN.path}
+              src={flags.GB.path}
               className="h-16 w-16"
               alt="Language Flag"
             />
           </div>
           <div
-            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh]"
+            className="card text-black p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh] bg-blue-100 "
             onClick={handleFlip}
           >
             <h1 className="text-lg">Norwegian</h1>
-            <p className="text-white text-2xl h-24">Here comes the word</p>
+            <p className="text-blue-100 text-2xl h-24">Here comes the word</p>
             <p
               className={`${
                 level === "advanced" ? "text-xl" : "text-4xl"
@@ -94,7 +95,7 @@ const CardX = ({ level }) => {
         </ReactCardFlip>
 
         <div
-          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] p-2 flex justify-center cursor-pointer md:w-[100px] md:justify-center md:items-center"
+          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] p-2 flex justify-center cursor-pointer md:w-[100px] md:justify-center md:items-center xl:h-[20vw]"
           onClick={handleNext}
         >
           Next word <span className="font-bold">˄</span>

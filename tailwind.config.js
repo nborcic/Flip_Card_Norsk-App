@@ -14,6 +14,7 @@ export default {
         's': '319px',
         'm': '375px',
         'l': '424px',
+        "xl": "500px",
 
       },
 

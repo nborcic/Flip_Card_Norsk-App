@@ -19,9 +19,9 @@ export default function IconButtonMenu() {
 
   return (
     <div>
-      <IconButton overlay="none"
+      <IconButton
+        overlay="none"
         sx={{
-          backgroundColor: "white",
           "&:hover": {
             backgroundColor: "lightgray",
           },
@@ -36,15 +36,16 @@ export default function IconButtonMenu() {
       </IconButton>
       <Menu
         id="long-menu"
-        sx={{ backgroundColor: "white" }}
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose} disabled>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose}>Black/White</MenuItem>
+        <MenuItem onClick={handleClose}>Flip Language</MenuItem>
       </Menu>
     </div>
   );

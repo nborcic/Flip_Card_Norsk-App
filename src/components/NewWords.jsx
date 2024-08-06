@@ -1,6 +1,5 @@
-import React from "react";
-import wordList from "/public/NewWords.json";
-
+import { React } from "react";
+import wordList from "../Assets/NewWords.json";
 const NewWords = () => {
   const firstRandom = Math.floor(Math.random() * wordList.length);
   const secondRandom = Math.floor(Math.random() * wordList.length);
@@ -26,13 +25,15 @@ const NewWords = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center rounded bg-blue-300 p-2  border flex-col border-black">
+      <div className="flex justify-center items-center rounded  p-2  border flex-col border-black">
         <br />
         <section className="mb-2">
           <p className="font-bold text-xl flex justify-center items-center">
             {word}
           </p>
-          <p className="flex justify-center items-center w-[80vw]">{def}</p>
+          <p className="flex justify-center items-center w-[80vw] xl:w-[510px]">
+            {def}
+          </p>
         </section>
         <section>
           <li>{varr0}</li>
@@ -44,7 +45,9 @@ const NewWords = () => {
           <p className="font-bold text-xl flex justify-center items-center">
             {wordd}
           </p>
-          <p className="flex justify-center items-center w-[80vw]">{deff}</p>
+          <p className="flex justify-center items-center w-[60vw] xl:w-[510px]">
+            {deff}
+          </p>
         </section>
         <section>
           <li>{varrr0}</li>
@@ -56,7 +59,9 @@ const NewWords = () => {
           <p className="font-bold text-xl flex justify-center items-center">
             {worddd}
           </p>
-          <p className="flex justify-center items-center w-[80vw]">{defff}</p>
+          <p className="flex justify-center items-center w-[80vw] xl:w-[510px]">
+            {defff}
+          </p>
         </section>
         <section>
           <li>{varrrr0}</li>
