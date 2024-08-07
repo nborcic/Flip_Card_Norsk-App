@@ -1,5 +1,6 @@
 import { React } from "react";
-import wordList from "../Assets/NewWords.json";
+import wordList from "../Assets/data/NewWords.json";
+
 const NewWords = () => {
   const firstRandom = Math.floor(Math.random() * wordList.length);
   const secondRandom = Math.floor(Math.random() * wordList.length);

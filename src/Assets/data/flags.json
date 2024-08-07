@@ -1,0 +1,10 @@
+{
+  "EN": {
+    "name": "English",
+    "path": "src/images/en_flag.webp"
+  },
+  "NO": {
+    "name": "Norwegian",
+    "path": "src/images/no_flag.webp"
+  }
+}
