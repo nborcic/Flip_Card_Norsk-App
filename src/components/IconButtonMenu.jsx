@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import AboutModal from "./AboutModal";
 
 export default function IconButtonMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -37,15 +38,16 @@ export default function IconButtonMenu() {
       <Menu
         id="long-menu"
         anchorEl={anchorEl}
-        keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose} disabled>
           Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>Black/White</MenuItem>
-        <MenuItem onClick={handleClose}>Flip Language</MenuItem>
+
+        <MenuItem>
+          <AboutModal />
+        </MenuItem>
       </Menu>
     </div>
   );
