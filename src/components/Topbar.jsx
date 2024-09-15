@@ -1,9 +1,8 @@
-import * as React from "react";
 import CustomCheckbox from "./CustomCheckbox";
 
 const Topbar = ({ setLevel }) => {
   return (
-    <div className=" h-[70px] border border-black rounded flex justify-center items-center  p-2">
+    <div className=" h-[70px]  border border-black bg-orange-100  rounded flex justify-center items-center  p-2">
       <div className="flex items-center flex-col">
         <div className=" justify-between items-center ">
           <CustomCheckbox setLevel={setLevel} />

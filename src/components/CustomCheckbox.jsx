@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -17,7 +16,7 @@ const CustomCheckbox = ({ setLevel }) => {
   };
 
   return (
-    <div className="s:pt-2 s:flex-col ">
+    <div className="s:pt-2 s:flex-col bg-orange-100 ">
       <Box>
         <FormControlLabel
           control={

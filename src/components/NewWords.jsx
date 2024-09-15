@@ -26,7 +26,7 @@ const NewWords = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center rounded  p-2  border flex-col border-black">
+      <div className="flex justify-center items-center rounded  p-2  border flex-col border-black bg-emerald-100">
         <br />
         <section className="mb-2">
           <p className="font-bold text-xl flex justify-center items-center">

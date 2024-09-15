@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
 
 const style = {
@@ -21,7 +21,7 @@ const AboutModal = () => {
 
   return (
     <div>
-      <h5 variant="contained" color="primary" onClick={handleOpen}>
+      <h5 color="primary" onClick={handleOpen}>
         About
       </h5>
       <Modal
@@ -37,9 +37,9 @@ const AboutModal = () => {
           <Typography id="about-modal-description" sx={{ mt: 2, mb: 2 }}>
             This is a simple application used for practicing Norwegian language
             using fast and easy method. <br />
-            App uses the most common words in Norwegian languagse and their
-            meanings. It also includes some variations of the words. modal
-            component. <br />
+            App uses the most common words in Norwegian languages and their
+            meanings. It also includes some variations of the words.
+            <br />
             It includes details about the app and its features.
           </Typography>
           <Button onClick={handleClose} variant="contained" sx={{ mt: 2 }}>
