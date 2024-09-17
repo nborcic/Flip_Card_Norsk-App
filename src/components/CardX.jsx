@@ -50,12 +50,12 @@ const CardX = ({ level }) => {
 
         <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
           <div
-            className="card text-orange p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh] bg-red-100
+            className="card text-orange p-4 rounded flex flex-col items-center justify-center w-[300px] h-[200px] m:w-[200px] l:w-[275px] l:h-[250px] s:w-[100%] s:h-[30vh] text-orange-300
              
             "
             onClick={handleFlip}
           >
-            <h1 className="text-lg font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:w-[20vw]">
+            <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:w-[20vw]">
               English
             </h1>
             <p className="text-transparent text-2xl h-24 m:text-xs">
@@ -64,7 +64,7 @@ const CardX = ({ level }) => {
             <p
               className={`${
                 level === "advanced" ? "text-xl" : "text-4xl"
-              } font-bold p-4 l:text-4xl justify-center items-center text-orange-300`}
+              } font-bold p-4 l:text-4xl justify-center items-center `}
             >
               {currentWord.word}
             </p>
@@ -79,7 +79,9 @@ const CardX = ({ level }) => {
             onClick={handleFlip}
           >
             <h1 className="text-lg">Norwegian</h1>
-            <p className="text-transparent text-2xl h-24">Here comes the word</p>
+            <p className="text-transparent text-2xl h-24">
+              Here comes the word
+            </p>
             <p
               className={`${
                 level === "advanced" ? "text-xl" : "text-4xl"

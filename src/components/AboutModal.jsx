@@ -11,6 +11,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  borderRadius: "10px",
 };
 
 const AboutModal = () => {
@@ -27,10 +28,11 @@ const AboutModal = () => {
       <Modal
         open={open}
         onClose={handleClose}
+        onClick={handleClose}
         aria-labelledby="about-modal-title"
         aria-describedby="about-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} onClick={handleClose}>
           <Typography id="about-modal-title" variant="h4" component="h2">
             About Flip To Know
           </Typography>
@@ -44,6 +46,15 @@ const AboutModal = () => {
           </Typography>
           <Button onClick={handleClose} variant="contained" sx={{ mt: 2 }}>
             Close
+          </Button>
+          <Button
+            onClick={handleClose}
+            href="https://github.com/nborcic/flip_card_norsk"
+            target="_blank"
+            variant="contained"
+            sx={{ mt: 2 }}
+          >
+            Github
           </Button>
         </Box>
       </Modal>

@@ -4,6 +4,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+
 const CustomCheckbox = ({ setLevel }) => {
   const [selectedLevel, setSelectedLevel] = useState("basic");
 
@@ -17,6 +18,7 @@ const CustomCheckbox = ({ setLevel }) => {
 
   return (
     <div className="s:pt-2 s:flex-col bg-orange-100 ">
+      
       <Box>
         <FormControlLabel
           control={
@@ -101,6 +103,7 @@ const CustomCheckbox = ({ setLevel }) => {
       </Box>
     </div>
   );
+  
 };
 
 export default CustomCheckbox;

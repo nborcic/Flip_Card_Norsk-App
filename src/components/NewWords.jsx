@@ -1,4 +1,3 @@
-import { React } from "react";
 import wordList from "../Assets/data/NewWords.json";
 
 const NewWords = () => {
