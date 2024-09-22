@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react";
+import { React, useState, useEffect, useMemo } from "react";
 import ReactCardFlip from "react-card-flip";
-import "./CardX.css";
 import flags from "../Assets/data/flags.json";
 import wordData from "../Assets/data/words.json";
+import "./CardX.css";
 
+// eslint-disable-next-line react/prop-types
 const CardX = ({ level }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [words, setWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentWord, setCurrentWord] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const levelWords = wordData.levels[level];
     setWords(levelWords);
     setCurrentWord(levelWords[0]);
     setCurrentIndex(0);
+    setLoading(false);
   }, [level]);
 
   const handleFlip = () => {
@@ -36,15 +39,38 @@ const CardX = ({ level }) => {
       setCurrentWord(words[newIndex]);
     }
   };
-  //after 3 secs of inactivity, flip card animation starts
-  return (
-    <div className="rounded flex justify-center items-center bg-sky-100  h-[30vh] border border-black">
+  // //position theme button
+  // //min size of cardx
+  //after 3 secs of inactivity, flip card animation icon starts
+  return loading ? (
+    <div className="flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">
+      <button type="button" class="bg-indigo-100 " disabled>
+        <svg class="animate-spin h-15 w-15 mr-3 " viewBox="00 0 24 24">
+          <circle
+            class="opacity-15"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Processing...
+      </button>
+    </div>
+  ) : (
+    <div className="rounded flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">
       <div className="flex flex-row items-center h-[40vh]">
         <div
           className="PREVIOUS WORD [writing-mode:vertical-rl] rotate-180 border font-bold rounded h-[100%] p-2 flex justify-center cursor-pointer md:w-[100px] md:justify-center md:items-center xl:h-[20vw] border-black l:h-[20vh] m:h-[20vh] s:h-[30vh] bg-amber-100"
           onClick={handlePrevious}
         >
-          <span className="font-bold previus_div ">˄</span>
+          <span className="font-bold previous_div ">˄</span>
           Previous word
         </div>
 
