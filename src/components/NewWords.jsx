@@ -1,3 +1,6 @@
+import React from "react";
+import { useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import wordList from "../Assets/data/NewWords.json";
 
 const NewWords = () => {
@@ -22,6 +25,24 @@ const NewWords = () => {
   const varrrr0 = wordList[thirdRandom].variations[0];
   const varrrr1 = wordList[thirdRandom].variations[1];
   const varrrr2 = wordList[thirdRandom].variations[2];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toast.info(
+        "It's simple, just try clicked on the word! Then click Next Word",
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        }
+      );
+    }, 30000); // 30 seconds of inactivity
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
 
   return (
     <div>
@@ -63,6 +84,7 @@ const NewWords = () => {
             {defff}
           </p>
         </section>
+        <ToastContainer />
         <section>
           <li>{varrrr0}</li>
           <li>{varrrr1}</li>

@@ -3,6 +3,8 @@ import ReactCardFlip from "react-card-flip";
 import flags from "../Assets/data/flags.json";
 import wordData from "../Assets/data/words.json";
 import "./CardX.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line react/prop-types
 const CardX = ({ level }) => {
@@ -39,9 +41,13 @@ const CardX = ({ level }) => {
       setCurrentWord(words[newIndex]);
     }
   };
+
+  
+
   // //position theme button
   // //min size of cardx
   //after 3 secs of inactivity, flip card animation icon starts
+  //button for explanation trip over page using toast , and timing so function is triggered and toast ae timed to be shown at exsact time
   return loading ? (
     <div className="flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">
       <button type="button" class="bg-indigo-100 " disabled>
