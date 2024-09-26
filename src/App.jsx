@@ -35,7 +35,7 @@ const App = () => {
     <themeContext.Provider value={value}>
       <div
         style={styles}
-        className="flex justify-center items-center m-auto bg-white max-w-[720px] "
+        className="flex justify-center items-center m-auto  max-w-[720px] "
       >
         <div className="shadow m-2 max-w-[720px] ">
           <Aboveall />

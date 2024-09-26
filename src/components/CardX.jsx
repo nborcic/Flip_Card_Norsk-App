@@ -3,8 +3,6 @@ import ReactCardFlip from "react-card-flip";
 import flags from "../Assets/data/flags.json";
 import wordData from "../Assets/data/words.json";
 import "./CardX.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line react/prop-types
 const CardX = ({ level }) => {
@@ -42,23 +40,30 @@ const CardX = ({ level }) => {
     }
   };
 
-  
-
   // //position theme button
   // //min size of cardx
-  //after 3 secs of inactivity, flip card animation icon starts
+  // //after 3 secs of inactivity, flip card animation icon starts
   //button for explanation trip over page using toast , and timing so function is triggered and toast ae timed to be shown at exsact time
+  //images of phone, tablet, desktop depending ona a display size
+  //sign in button
+  //login page, routing, sign up,
+  //form for adding more words in the app, within new page
+
   return loading ? (
     <div className="flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">
-      <button type="button" class="bg-indigo-100 " disabled>
-        <svg class="animate-spin h-15 w-15 mr-3 " viewBox="00 0 24 24">
+      <button
+        type="button"
+        class="bg-indigo-100 text-black font-bold py-2 px-4 rounded-full bg-transparent"
+        disabled
+      >
+        <svg class="animate-spin h-15 w-15 mr-13 " viewBox="00 0 24 24">
           <circle
             class="opacity-15"
             cx="12"
             cy="12"
             r="10"
             stroke="currentColor"
-            stroke-width="4"
+            strokeWidth="4"
           ></circle>
           <path
             class="opacity-75"
@@ -66,7 +71,7 @@ const CardX = ({ level }) => {
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
           ></path>
         </svg>
-        Processing...
+        Loading...
       </button>
     </div>
   ) : (
