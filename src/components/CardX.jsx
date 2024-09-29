@@ -54,12 +54,12 @@ const CardX = ({ level }) => {
     <div className="flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">
       <button
         type="button"
-        class="bg-indigo-100 text-black font-bold py-2 px-4 rounded-full bg-transparent"
+        className="bg-indigo-100 text-black font-bold py-2 px-4 rounded-full bg-transparent"
         disabled
       >
-        <svg class="animate-spin h-15 w-15 mr-13 " viewBox="00 0 24 24">
+        <svg className="animate-spin h-15 w-15 mr-13 " viewBox="00 0 24 24">
           <circle
-            class="opacity-15"
+            className="opacity-15"
             cx="12"
             cy="12"
             r="10"
@@ -67,7 +67,7 @@ const CardX = ({ level }) => {
             strokeWidth="4"
           ></circle>
           <path
-            class="opacity-75"
+            className="opacity-75"
             fill="currentColor"
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
           ></path>
