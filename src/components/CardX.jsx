@@ -48,6 +48,7 @@ const CardX = ({ level }) => {
   //sign in button
   //login page, routing, sign up,
   //form for adding more words in the app, within new page
+  //img for different width of screen
 
   return loading ? (
     <div className="flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">

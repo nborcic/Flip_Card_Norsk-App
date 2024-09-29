@@ -15,6 +15,7 @@ const CustomCheckbox = ({ setLevel }) => {
     setSelectedLevel(value);
     setLevel(value);
   };
+  const windowWidth = window.innerWidth;
 
   return (
     <div className="flex flex-row justify-center items-center">
@@ -104,8 +105,8 @@ const CustomCheckbox = ({ setLevel }) => {
           </Box>
         </div>
       </div>
-      <div className="text-3xl relative" style={{ right: "calc(-15%)" }}>
-        <FaMobileAlt />
+      <div className="text-3xl relative">
+        {windowWidth > 375 ? <FaMobileAlt /> : null}
       </div>
     </div>
   );

@@ -27,7 +27,10 @@ const Aboveall = () => {
           className="rounded-xl h-[50px] w-[50px]"
           alt="userIcon"
         />
-        <IoLogInOutline className="text-3xl" onClick={handleSignIn} />
+        <IoLogInOutline
+          className="text-3xl cursor-pointer"
+          onClick={handleSignIn}
+        />
       </div>
 
       <p className="font-mono font-bold text-xl s:text-s">Flip To Know</p>

@@ -1,6 +1,8 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 2xl:p-12 3xl:p-14 bg-[#ffffff] rounded-2xl shadow-xl">
       <div className="flex flex-row gap-3 pb-4">
@@ -127,6 +129,13 @@ const SignUpPage = () => {
           className="w-full text-[#FFFFFF] bg-[#4F46E5] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
         >
           Sign Up
+        </button>
+        <button
+          type="button"
+          className="w-full bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
+          onClick={() => navigate("/Login")}
+        >
+          Home
         </button>
         <div className="text-sm font-light text-[#6B7280] ">
           Already have an account?{" "}

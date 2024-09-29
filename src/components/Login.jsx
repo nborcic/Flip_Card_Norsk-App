@@ -1,9 +1,17 @@
 import React from "react";
 import { CiLogin } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
-    <div className="flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 2xl:p-12 3xl:p-14 bg-white rounded-2xl shadow-xl">
+    //fix buttons color at bottons
+    //fix logo
+    //login navigate to login page
+    //github twitter buttons
+    //prepare for backend
+
+    <div className="flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 2xl:p-12 3xl:p-14 bg-white rounded-2xl shadow-xl !max-w-[900px]">
       <div className="flex flex-row gap-3 pb-4">
         <div>
           <CiLogin className="text-4xl text-blue" />
@@ -94,11 +102,22 @@ const Login = () => {
         >
           Login
         </button>
+        <button
+          type="button"
+          className="w-full text-grey-600 bg-gray-100  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
+          onClick={() => navigate("/")}
+        >
+          Home
+        </button>
         <div className="text-sm font-light text-[#143cdd]">
           Don't have an account yet?{" "}
-          <a href="#" className="font-medium text-[#3eade9] hover:underline">
+          <button
+            type="button"
+            className="font-medium text-[#3eade9] hover:underline"
+            onClick={() => navigate("/SignUp")}
+          >
             Sign Up
-          </a>
+          </button>
         </div>
       </form>
       <div className="relative flex py-8 items-center">
@@ -108,7 +127,7 @@ const Login = () => {
       </div>
       <form>
         <div className="flex flex-row gap-2 justify-center">
-          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md text-gray-200">
+          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -120,6 +139,20 @@ const Login = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               className="lucide lucide-github"
+            ></svg>
+          </button>
+          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-github  "
             ></svg>
           </button>
         </div>
