@@ -7,6 +7,7 @@ import Login from "./components/Login.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
+import { Dashboard } from "@mui/icons-material";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
     element: <UpdateCards />,
     errorElement: <ErrorPage />,
   },
-  
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

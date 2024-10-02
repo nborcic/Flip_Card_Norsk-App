@@ -3,11 +3,26 @@ import { CiLogin } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (email === "admin" && password === "admin") {
+      navigate("/dashboard");
+    }
+
+    setEmail("");
+    setPassword("");
+    
+  };
+
   const navigate = useNavigate();
   return (
     //fix buttons color at bottons
     //fix logo
-    //login navigate to login page
+    //login navigate to dashboard page
     //github twitter buttons
     //prepare for backend
 
@@ -52,9 +67,11 @@ const Login = () => {
             <input
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               id="email"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
-              placeholder="name@company.com"
+              placeholder="email@email.com"
               autoComplete="off"
             />
           </div>
@@ -89,6 +106,8 @@ const Login = () => {
             <input
               type="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               id="password"
               placeholder="••••••••••"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
@@ -98,6 +117,7 @@ const Login = () => {
         </div>
         <button
           type="submit"
+          onClick={handleSubmit}
           className="w-full text-white bg-[#3eade9] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
         >
           Login

@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import Word from './models/words.js';
-import manywords from './models/words.js';
+
+
+
 
 
 
@@ -16,6 +18,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
@@ -37,12 +40,6 @@ const getItem = async (req, res, next) => {
   next();
 };
 
-
-
-
-
-
-
 // Get all items
 app.get('/api/words', async (req, res) => {
   try {
@@ -52,9 +49,6 @@ app.get('/api/words', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-
-
 
 // Create a new word
 app.post('/api/words', async (req, res) => {
@@ -71,17 +65,25 @@ app.post('/api/words', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-// Get a single item
+// Get a single item by ID
 app.get('/api/words/:id', getItem, (req, res) => {
   res.json(res.item).send("GET done");
 });
+
+//dashboard api
+app.get('/api/data', async (req, res) => {
+  try {
+    const data = await Data.find();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
+
+
 
 // Update an item
 app.patch('/api/words/:id', getItem, async (req, res) => {

@@ -4,6 +4,7 @@ import CardX from "./components/CardX";
 import NewWords from "./components/NewWords";
 import { useState, useContext, useMemo } from "react";
 import { createContext } from "react";
+import { Dashboard } from "@mui/icons-material";
 
 export const themeContext = createContext();
 
@@ -44,6 +45,7 @@ const App = () => {
           <NewWords />
         </div>
       </div>
+      <Dashboard />
     </themeContext.Provider>
   );
 };

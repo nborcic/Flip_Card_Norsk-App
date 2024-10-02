@@ -23,9 +23,23 @@ const ManyWordsSchema = new mongoose.Schema({
     timestamps: true,
 });
 
+const DashboardSchema = new mongoose.Schema({
+    title: String,
+    value: Number,
+});
 
-const word = mongoose.model('Word', WordsSchema);
-const manyWords = mongoose.model('ManyWord', ManyWordsSchema);
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    age: Number
+});
 
-export default word;
-export { manyWords };
+
+
+const DashboardData = mongoose.model('DashboardData', DashboardSchema);
+const Word = mongoose.model('Word', WordsSchema);
+const ManyWords = mongoose.model('ManyWords', ManyWordsSchema);
+const LoginUser = mongoose.model('LoginUser', UserSchema);
+
+export default Word;
+export { ManyWords, DashboardData, LoginUser };
