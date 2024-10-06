@@ -8,14 +8,30 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    fetch("/loginPage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          navigate("/dashboard");
+        } else {
+          alert("Login failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
     if (email === "admin" && password === "admin") {
-      navigate("/dashboard");
+      navigate("/admin");
     }
-
     setEmail("");
     setPassword("");
-    
   };
 
   const navigate = useNavigate();
@@ -73,6 +89,7 @@ const Login = () => {
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
               placeholder="email@email.com"
               autoComplete="off"
+              required
             />
           </div>
         </div>
@@ -112,6 +129,7 @@ const Login = () => {
               placeholder="••••••••••"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
               autoComplete="new-password"
+              required
             />
           </div>
         </div>

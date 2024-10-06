@@ -1,0 +1,68 @@
+import React from "react";
+import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+const AdminDashboard = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full">
+        <Typography
+          variant="h4"
+          gutterBottom
+          className="text-center text-blue-600"
+        >
+          Admin Dashboard
+        </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          className="text-center text-gray-700"
+        >
+          Welcome to the admin dashboard. You can manage users, update settings,
+          and view stats here.
+        </Typography>
+
+        <div className="mt-4">
+          <Typography variant="h6" gutterBottom className="text-blue-600">
+            User Management
+          </Typography>
+          <Typography variant="body2" gutterBottom className="text-gray-700">
+            - Add, edit, or remove users
+          </Typography>
+          <Typography variant="h6" gutterBottom className="text-blue-600 mt-4">
+            Settings
+          </Typography>
+          <Typography variant="body2" gutterBottom className="text-gray-700">
+            - Update application settings
+          </Typography>
+          <Typography variant="h6" gutterBottom className="text-blue-600 mt-4">
+            Statistics
+          </Typography>
+          <Typography variant="body2" gutterBottom className="text-gray-700">
+            - View usage statistics and reports
+          </Typography>
+          <div className="gap-2 flex">
+            <button
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => navigate("/")}
+            >
+              {" "}
+              Home
+            </button>
+            <button
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => navigate("/")}
+            >
+              {" "}
+              Logoff
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminDashboard;

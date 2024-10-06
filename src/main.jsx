@@ -7,8 +7,9 @@ import Login from "./components/Login.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
-import { Dashboard } from "@mui/icons-material";
+import AdminDashboard from "./components/AdminDashboard.jsx";
 
+// Define your routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,11 +32,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/admin/",
+    element: <AdminDashboard />,
     errorElement: <ErrorPage />,
   },
 ]);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
