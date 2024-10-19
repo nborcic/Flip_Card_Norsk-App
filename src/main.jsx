@@ -5,7 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
-import SignUpPage from "./components/SignUpPage.jsx";
+import Register from "./components/Register.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
 
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/signUpPage",
-    element: <SignUpPage />,
+    path: "/Register",
+    element: <Register />,
     errorElement: <ErrorPage />,
   },
   {

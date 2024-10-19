@@ -1,3 +1,4 @@
+// Removed unused import
 import React from "react";
 import { CiLogin } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
@@ -8,17 +9,18 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("/loginPage", {
+    fetch("http://localhost:5050/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     })
-      .then((response) => response.json())
+      .then((response) => response.text())
+
       .then((data) => {
         if (data.success) {
-          navigate("/dashboard");
+          navigate("/admin");
         } else {
           alert("Login failed");
         }
@@ -30,13 +32,14 @@ const Login = () => {
     if (email === "admin" && password === "admin") {
       navigate("/admin");
     }
+
     setEmail("");
     setPassword("");
   };
 
   const navigate = useNavigate();
   return (
-    //fix buttons color at bottons
+    //fix buttons color at buttons
     //fix logo
     //login navigate to dashboard page
     //github twitter buttons
@@ -54,7 +57,12 @@ const Login = () => {
       <div className="text-sm font-light text-[#143cdd] pb-8">
         Login to your account
       </div>
-      <form className="flex flex-col">
+      <form
+        className="flex flex-col"
+        onSubmit={handleSubmit}
+        noValidate
+        autoComplete="off"
+      >
         <div className="pb-2">
           <label
             htmlFor="email"
@@ -74,7 +82,7 @@ const Login = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="lucide lucide-mail"
+                className="icon icon-mail"
               >
                 <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
@@ -112,7 +120,7 @@ const Login = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="lucide lucide-square-asterisk"
+                className="icon icon-square-asterisk"
               >
                 <rect width="18" height="18" x="3" y="3" rx="2"></rect>
                 <path d="M12 8v8"></path>
@@ -176,7 +184,7 @@ const Login = () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-github"
+              className="icon icon-github"
             ></svg>
           </button>
           <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md text-white">
@@ -190,7 +198,7 @@ const Login = () => {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-github  "
+              className="icon icon-github"
             ></svg>
           </button>
         </div>

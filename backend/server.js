@@ -4,6 +4,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import wordRoutes from './routes/wordsApi.js';
 import userRoutes from './routes/usersApi.js';
+import bodyParser from 'body-parser';
+import bcrypt from 'bcrypt';
+
+
 
 dotenv.config();
 
@@ -12,6 +16,8 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
@@ -23,6 +29,8 @@ app.use('/api/words', wordRoutes);
 
 // Use the user routes
 app.use('/api/users', userRoutes);
+
+
 
 // Start server
 const PORT = process.env.PORT || 5000;

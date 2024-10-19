@@ -28,7 +28,7 @@ async function getItem(req, res, next) {
 }
 
 // Get all items
-router.get('/', async (req, res) => {
+router.get('/', async (res) => {
     try {
         const words = await Word.find();
         res.json(words);
@@ -38,8 +38,27 @@ router.get('/', async (req, res) => {
 });
 
 // Get a single item by ID
-router.get('/:id', getItem, (req, res) => {
+router.get('/:id', getItem, (res) => {
     res.json(res.item);
+});
+
+async function getByName(req, res, next) {
+    let name;
+    try {
+        name = await Word.findOne({ name: req.params.name });
+        if (name == null) {
+            return res.status(404).json({ message: 'Cannot find item' });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+
+    res.name = name;
+    next();
+}
+
+router.get('/name/:name', getByName, (req, res) => {
+    res.json(res.word);
 });
 
 // Create a new word
