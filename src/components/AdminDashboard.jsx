@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import DashboardUsers from "./DashboardUsers";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -29,20 +30,9 @@ const AdminDashboard = () => {
             User Management
           </Typography>
           <Typography variant="body2" gutterBottom className="text-gray-700">
-            - Add, edit, or remove users
+            <DashboardUsers />
           </Typography>
-          <Typography variant="h6" gutterBottom className="text-blue-600 mt-4">
-            Settings
-          </Typography>
-          <Typography variant="body2" gutterBottom className="text-gray-700">
-            - Update application settings
-          </Typography>
-          <Typography variant="h6" gutterBottom className="text-blue-600 mt-4">
-            Statistics
-          </Typography>
-          <Typography variant="body2" gutterBottom className="text-gray-700">
-            - View usage statistics and reports
-          </Typography>
+
           <div className="gap-2 flex">
             <button
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

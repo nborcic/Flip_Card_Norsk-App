@@ -14,6 +14,11 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //  frontend validation
+    if (!formData.name || !formData.email || !formData.password) {
+      alert("All fields are required.");
+      return;
+    }
 
     fetch("http://localhost:5050/api/users/register", {
       method: "POST",
@@ -95,7 +100,7 @@ const Register = () => {
             />
           </div>
         </div>
-        {/* <div className="pb-2">
+        <div className="pb-2">
           <label
             htmlFor="email"
             className="block mb-2 text-sm font-medium text-[#111827]"
@@ -176,7 +181,7 @@ const Register = () => {
               autoComplete="new-password"
             />
           </div>
-        </div> */}
+        </div>
         <button
           type="submit"
           className="w-full text-[#FFFFFF] bg-[#4F46E5] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
@@ -192,7 +197,10 @@ const Register = () => {
         </button>
         <div className="text-sm font-light text-[#6B7280] ">
           Already have an account?{" "}
-          <a href="#" className="font-medium text-[#4F46E5] hover:underline">
+          <a
+            href=" navigate('/login')"
+            className="font-medium text-[#4F46E5] hover:underline"
+          >
             Login
           </a>
         </div>

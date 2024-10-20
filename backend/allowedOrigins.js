@@ -6,4 +6,4 @@ const allowedOrigins = [
 
 ];
 
-module.exports = allowedOrigins;
+export default allowedOrigins;

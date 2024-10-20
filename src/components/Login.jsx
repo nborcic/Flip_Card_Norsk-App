@@ -6,9 +6,21 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
+
+    if (!email.includes("@")) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
     fetch("http://localhost:5050/api/users/login", {
       method: "POST",
       headers: {
@@ -16,10 +28,13 @@ const Login = () => {
       },
       body: JSON.stringify({ email, password }),
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
 
       .then((data) => {
-        if (data.success) {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          // console.log("Token:", data.token); Testing token
+
           navigate("/admin");
         } else {
           alert("Login failed");
@@ -29,15 +44,10 @@ const Login = () => {
         console.error("Error:", error);
       });
 
-    if (email === "admin" && password === "admin") {
-      navigate("/admin");
-    }
-
     setEmail("");
     setPassword("");
   };
 
-  const navigate = useNavigate();
   return (
     //fix buttons color at buttons
     //fix logo
@@ -160,7 +170,7 @@ const Login = () => {
           <button
             type="button"
             className="font-medium text-[#3eade9] hover:underline"
-            onClick={() => navigate("/SignUp")}
+            onClick={() => navigate("/Register")}
           >
             Sign Up
           </button>
