@@ -27,7 +27,7 @@ const App = () => {
 
   const styles = {
     backgroundColor:
-      theme === "light" ? "rgb(255, 255, 255)" : "rgb(241,255,219)",
+      theme === "light" ? "rgb(201, 222, 247)" : "rgb(255,255,255)",
     color: theme === "light" ? "rgb(0, 0, 0)" : "rgb(0, 0, 0)",
   };
 

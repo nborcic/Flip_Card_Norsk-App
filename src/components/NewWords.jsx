@@ -1,9 +1,11 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import wordList from "../Assets/data/NewWords.json";
+import { useTheme } from "../App";
 
 const NewWords = () => {
+  const { theme, styles, toggleTheme } = useTheme();
   const firstRandom = Math.floor(Math.random() * wordList.length);
   const secondRandom = Math.floor(Math.random() * wordList.length);
   const thirdRandom = Math.floor(Math.random() * wordList.length);
@@ -46,7 +48,10 @@ const NewWords = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center rounded  p-2  border flex-col border-black bg-emerald-100">
+      <div
+        style={styles}
+        className="flex justify-center items-center rounded  p-2  border flex-col border-black bg-emerald-100"
+      >
         <br />
         <section className="mb-2">
           <p className="font-bold text-xl flex justify-center items-center">

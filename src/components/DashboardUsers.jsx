@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import ToDo from "./ToDo";
+
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,14 +51,19 @@ const UserList = () => {
 
   return (
     <div className="user-list">
-      <h2>User List</h2>
+      <h2 className="text-xl">User List:</h2>
       <ul>
         {users.map((user) => (
           <li key={user._id}>
-            <strong>{user.name}</strong> - {user.email}
+            <strong>Name: {user.name}</strong> - Email: {user.email}
           </li>
         ))}
       </ul>
+      <h3>Total Users: {users.length}</h3>
+      <div className="p-2 pl-0">
+        <p className="text-xl">List to improve the App:</p>
+        <ToDo />
+      </div>
     </div>
   );
 };

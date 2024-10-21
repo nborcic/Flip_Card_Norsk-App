@@ -6,6 +6,11 @@ import DashboardUsers from "./DashboardUsers";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
+  const handleLogoffActions = () => {
+    localStorage.removeItem("token");
+    navigate("/loginPage");
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full">
@@ -43,7 +48,7 @@ const AdminDashboard = () => {
             </button>
             <button
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => navigate("/")}
+              onClick={() => handleLogoffActions()}
             >
               {" "}
               Logoff

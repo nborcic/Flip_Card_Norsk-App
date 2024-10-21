@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import wordRoutes from './routes/wordsApi.js';
 import userRoutes from './routes/usersApi.js';
 import bodyParser from 'body-parser';
-import bcrypt from 'bcrypt';
+
 
 
 

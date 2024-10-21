@@ -5,14 +5,14 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
-// Define User Schema
+// User Schema
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
 });
 
-// Pre-save hook to hash password
+// Pre-save to hash password
 UserSchema.pre('save', async function (next) {
     const user = this;
     if (user.isModified('password')) {
@@ -27,13 +27,17 @@ UserSchema.pre('save', async function (next) {
 
 const User = mongoose.model('User', UserSchema);
 
-// Middleware to authenticate token
+// Middleware token authentication
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
         return res.status(401).send({ error: 'Unauthorized' });
+    }
+    // token blacklisted?
+    if (blacklistedTokens.includes(token)) {
+        return res.status(403).send({ error: 'Token is blacklisted. Please log in again.' });
     }
 
     jwt.verify(token, process.env.MY_SECRET, (err, user) => {
@@ -45,10 +49,20 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
+const blacklistedTokens = []; // blacklisted tokens after logoff
+
+router.post('/logout', authenticateToken, (req, res) => {
+    const token = req.token;
+
+    // Add the token to the blacklistedTokens
+    blacklistedTokens.push(token);
+    res.status(200).send({ message: 'Logout successful' });
+});
+
 // Get all users - /users/
 router.get('/', authenticateToken, async (req, res) => {
     try {
-        const users = await User.find().select('-password'); // Exclude passwords
+        const users = await User.find().select('-password'); // Exclude password
         res.json(users);
     } catch (err) {
         res.status(500).json('Server Error: ' + err);
@@ -75,7 +89,7 @@ async function getUser(req, res, next) {
     next();
 }
 
-// Register Endpoint
+// Register Endpoint - /users/register - name, email, password
 router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
     try {
@@ -116,24 +130,5 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Get user by email (not commonly used, consider removal if not required)
-router.get('/api/users/email/:email', authenticateToken, getUserByEmail, (req, res) => {
-    res.json(res.user);
-});
-
-// Middleware to get user by email
-async function getUserByEmail(req, res, next) {
-    let user;
-    try {
-        user = await User.findOne({ email: req.params.email }).select('-password');
-        if (!user) {
-            return res.status(404).json({ message: 'Cannot find user' });
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message });
-    }
-    res.user = user;
-    next();
-}
 
 export default router;
