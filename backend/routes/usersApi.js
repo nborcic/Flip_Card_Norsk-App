@@ -107,7 +107,7 @@ router.post('/register', async (req, res) => {
 
 // Login Endpoint
 router.post('/login', async (req, res) => {
-    console.log("Login request body:", req.body);
+
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
