@@ -22,7 +22,7 @@ const UserList = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Include token in the request
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -50,17 +50,78 @@ const UserList = () => {
     return <div>Error: {error}</div>;
   }
 
+  const deleteUser = async (userId) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("No token found. Please log in.");
+      return;
+    }
+    try {
+      const response = await fetch(
+        `http://localhost:5050/api/users/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete userR");
+      }
+      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  const tableHeaderStyle = {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "8px",
+    textAlign: "left",
+    borderBottom: "2px solid #ddd",
+  };
+
+  const tableRowStyle = {
+    borderBottom: "1px solid #ddd",
+  };
+
+  const tableDataStyle = {
+    padding: "8px",
+    textAlign: "left",
+  };
   return (
     <div className="user-list">
-      <h2 className="text-xl text-blue-600">User List:</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            <strong>Name: {user.name}</strong> - Email: {user.email}
-          </li>
-        ))}
-      </ul>
-      <h3>Total Users: {users.length}</h3>
+      <table
+        style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}
+      >
+        <thead>
+          <tr>
+            <th style={tableHeaderStyle}>Name</th>
+            <th style={tableHeaderStyle}>Email</th>
+            <th style={tableHeaderStyle}>Admin</th>
+            <th style={tableHeaderStyle}>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user._id} style={tableRowStyle}>
+              <td style={tableDataStyle}>{user.name}</td>
+              <td style={tableDataStyle}>{user.email}</td>
+              <td style={tableDataStyle}>{user.isAdmin ? "Yes" : "No"}</td>
+              <td
+                style={tableDataStyle}
+                className="cursor-pointer text-red-500"
+                onClick={() => deleteUser(user._id)}
+              >
+                X
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h3 className="text-sm text-blue-600">Total Users: {users.length}</h3>
       <div className="p-2 pl-0">
         <p className="text-xl text-center text-blue-600">
           List to improve the App:

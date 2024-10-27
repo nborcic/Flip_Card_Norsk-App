@@ -90,6 +90,7 @@ const Register = () => {
             </span>
             <input
               type="text"
+              maxLength={20}
               name="name"
               id="name"
               value={formData.name}

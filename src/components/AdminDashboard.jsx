@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DashboardUsers from "./DashboardUsers";
-import AddMoreWords from "./Notification";
+
 
 const AdminDashboard = () => {
   const navigate = useNavigate();

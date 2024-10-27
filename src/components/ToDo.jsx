@@ -11,13 +11,11 @@ function InputList() {
     if (savedItems) {
       setItems(savedItems);
     }
-    console.log("Loaded items from localStorage:", savedItems);
   }, []);
 
   // Save items to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("todoItems", JSON.stringify(items));
-    console.log("Saved items to localStorage:", items);
   }, [items]);
 
   const deleteMe = (id) => {
@@ -67,7 +65,7 @@ function InputList() {
         </form>
 
         <div className="flex justify-center items-center px-4 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-indigo-400">
-          <ol className="w-[100rem]">
+          <div className="w-[100rem]">
             {items.map((item, id) => (
               <li
                 className="bg-white rounded p-2 font-bold flex justify-between items-center hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50  transition duration-500 ease-in-out m-2 w-[100%]"
@@ -97,7 +95,7 @@ function InputList() {
                 </div>
               </li>
             ))}
-          </ol>
+          </div>
         </div>
       </div>
     </>

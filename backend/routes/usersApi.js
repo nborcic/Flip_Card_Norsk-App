@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-
+    isAdmin: { type: Boolean, default: false }
 });
 
 //TODO
@@ -55,14 +55,36 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
+
 const blacklistedTokens = []; // blacklisted tokens after logoff
 
-router.post('/logout', authenticateToken, (req, res) => {
-    const token = req.token;
+
+
+router.post('/api/logout', authenticateToken, (req, res) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
     // Add the token to the blacklistedTokens
     blacklistedTokens.push(token);
     res.status(200).send({ message: 'Logout successful' });
+});
+
+router.delete('/:id', authenticateToken, getUser, async (req, res) => {
+    try {
+        // If user doesn't exist, respond with 404
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+
+        console.log("User deleted", user);
+
+        res.json({ message: 'User deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting user:', err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 // Get all users - /users/
@@ -84,7 +106,7 @@ router.get('/:id', authenticateToken, getUser, (req, res) => {
 async function getUser(req, res, next) {
     let user;
     try {
-        user = await User.findById(req.params.id).select('-password'); // Exclude password
+        user = await User.findById(req.params.id).select('-password');
         if (!user) {
             return res.status(404).json({ message: 'Cannot find user' });
         }
@@ -98,13 +120,18 @@ async function getUser(req, res, next) {
 // Register Endpoint - /users/register - name, email, password
 router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
+
+    const userCount = await User.countDocuments();
+
+    const isAdmin = userCount === 0;
+
     try {
         // Create a new user instance
-        const user = new User({ name, email, password });
+        const user = new User({ name, email, password, isAdmin });
 
-        // Save the user to the database (pre-save hook will hash password)
+        // Save to the database (pre-save hook for hash password)
         await user.save();
-        res.status(201).send({ success: true, message: 'User registered successfully' });
+        res.status(201).send({ success: true, message: isAdmin ? 'Admin user created successfully' : 'User created successfully' });
     } catch (error) {
         console.error("Registration error:", error);
         res.status(400).send({ success: false, error: error.message || 'User registration failed' });

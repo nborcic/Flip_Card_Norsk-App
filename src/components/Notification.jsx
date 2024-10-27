@@ -3,7 +3,7 @@ import React from "react";
 const Notification = () => {
   return (
     <div className="rounded-lg w-[600px] h-32  bg-[#6586d4] text-[#ffffff]">
-      <div className="flex flex-row w-full gap-5 justify-center items-center px-5 w-full h-full">
+      <div className="flex flex-row  gap-5 justify-center items-center px-5 w-full h-full">
         <div className="my-auto text-2xl">
           <svg
             xmlns="http://www.w3.org/2000/svg"
