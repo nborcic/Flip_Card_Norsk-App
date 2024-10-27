@@ -2,6 +2,7 @@ import React from "react";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DashboardUsers from "./DashboardUsers";
+import AddMoreWords from "./Notification";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -9,6 +10,9 @@ const AdminDashboard = () => {
   const handleLogoffActions = () => {
     localStorage.removeItem("token");
     navigate("/loginPage");
+  };
+  const handleMoreWords = () => {
+    navigate("/addMoreWords");
   };
 
   return (
@@ -52,6 +56,13 @@ const AdminDashboard = () => {
             >
               {" "}
               Logoff
+            </button>
+            <button
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => handleMoreWords()}
+            >
+              {" "}
+              Add more words
             </button>
           </div>
         </div>

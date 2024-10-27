@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import ToDo from "./ToDo";
 
+//table of usernames and emails from db
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +52,7 @@ const UserList = () => {
 
   return (
     <div className="user-list">
-      <h2 className="text-xl">User List:</h2>
+      <h2 className="text-xl text-blue-600">User List:</h2>
       <ul>
         {users.map((user) => (
           <li key={user._id}>
@@ -61,7 +62,9 @@ const UserList = () => {
       </ul>
       <h3>Total Users: {users.length}</h3>
       <div className="p-2 pl-0">
-        <p className="text-xl">List to improve the App:</p>
+        <p className="text-xl text-center text-blue-600">
+          List to improve the App:
+        </p>
         <ToDo />
       </div>
     </div>

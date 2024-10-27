@@ -2,6 +2,8 @@ import React from "react";
 import { CgEditFlipH } from "react-icons/cg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const initialValues = {
   name: "",
@@ -136,7 +138,7 @@ const Register = () => {
               }
               id="email"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
-              placeholder="name@company.com"
+              placeholder="Your Email"
               autoComplete="off"
             />
           </div>
@@ -184,7 +186,7 @@ const Register = () => {
         </div>
         <button
           type="submit"
-          className="w-full text-[#FFFFFF] bg-[#4F46E5] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
+          className="w-full text-[#FFFFFF] bg-[#4F46E5] hover:bg-[#36347a] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
         >
           Sign Up
         </button>
@@ -197,12 +199,12 @@ const Register = () => {
         </button>
         <div className="text-sm font-light text-[#6B7280] ">
           Already have an account?{" "}
-          <a
-            href=" navigate('/login')"
-            className="font-medium text-[#4F46E5] hover:underline"
+          <Link
+            onClick={() => navigate("/loginPage")}
+            className="font-medium text-[#4F46E5] hover:underline hover:pointer"
           >
             Login
-          </a>
+          </Link>
         </div>
       </form>
       <div className="relative flex py-8 items-center">
@@ -212,7 +214,7 @@ const Register = () => {
       </div>
       <form>
         <div className="flex flex-row gap-2 justify-center">
-          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md text-gray-200">
+          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md hover:bg-[#26678b] text-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -230,7 +232,7 @@ const Register = () => {
             </svg>{" "}
             <span className="font-medium mx-auto">Github</span>
           </button>
-          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md text-gray-200">
+          <button className="flex flex-row w-32 gap-2 bg-gray-600 hover:bg-[#26678b] p-2 rounded-md text-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

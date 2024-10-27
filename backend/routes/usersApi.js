@@ -10,7 +10,13 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+
 });
+
+//TODO
+//wrong answers structure define 
+//isAdmin field in UserSchema
+
 
 // Pre-save to hash password
 UserSchema.pre('save', async function (next) {

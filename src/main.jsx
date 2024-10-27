@@ -8,6 +8,7 @@ import ErrorPage from "./components/ErrorPage.jsx";
 import Register from "./components/Register.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
+import AddMoreWords from "./components/Notification.jsx";
 
 // Define your routes
 const router = createBrowserRouter([
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
     element: <AdminDashboard />,
     errorElement: <ErrorPage />,
   },
+  // {
+  //   path: "/addMoreWords",
+  //   element: <AddMoreWords />,
+  //   errorElement: <ErrorPage />,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

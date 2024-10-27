@@ -1,6 +1,4 @@
 import React from "react";
-import { useEffect, useContext } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import wordList from "../Assets/data/NewWords.json";
 import { useTheme } from "../App";
 
@@ -28,28 +26,15 @@ const NewWords = () => {
   const varrrr1 = wordList[thirdRandom].variations[1];
   const varrrr2 = wordList[thirdRandom].variations[2];
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      toast.info(
-        "It's simple, just try clicked on the word! Then click Next Word",
-        {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        }
-      );
-    }, 30000); // 30 seconds of inactivity
-
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, []);
+  
 
   return (
     <div>
       <div
-        style={styles}
+        style={{
+          ...styles,
+          backgroundColor: theme === "light" ? "rgb(209, 209, 101)" : "white",
+        }}
         className="flex justify-center items-center rounded  p-2  border flex-col border-black bg-emerald-100"
       >
         <br />
@@ -89,7 +74,7 @@ const NewWords = () => {
             {defff}
           </p>
         </section>
-        <ToastContainer />
+    
         <section>
           <li>{varrrr0}</li>
           <li>{varrrr1}</li>
