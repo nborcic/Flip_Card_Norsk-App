@@ -22,4 +22,5 @@ dist-ssr
 *.njsproj
 .env
 *.sln
-*.sw?
+*.sw?   
+client_secret.jsonGOOGLE_DRIVE_API

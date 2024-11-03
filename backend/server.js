@@ -3,11 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import wordRoutes from './routes/wordsApi.js';
-import userRoutes from './routes/usersApi.js';
+import userRoutes from './routes/usersApi.js'; 1
+// import UserFiles from './routes/filesApi.js';
 import bodyParser from 'body-parser';
-
-
-
 
 dotenv.config();
 
@@ -35,7 +33,8 @@ app.use('/api/words', wordRoutes);
 // Use the user routes
 app.use('/api/users', userRoutes);
 
-
+// // Use the file routes
+// app.use('/api/files', UserFiles);
 
 // Start server
 const PORT = process.env.PORT;

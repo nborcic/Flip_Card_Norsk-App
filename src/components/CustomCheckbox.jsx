@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { FaMobileAlt } from "react-icons/fa";
 

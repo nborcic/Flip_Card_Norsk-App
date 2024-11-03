@@ -1,20 +1,20 @@
 import React from "react";
 import { CgEditFlipH } from "react-icons/cg";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { AvatarUploader } from "../Assets/data/utilsData";
 
-const initialValues = {
+export const initialData = {
+  userAvatar: "",
   name: "",
   email: "",
   password: "",
-  userAvatar: "",
   files: "",
 };
-const Register = () => {
+const RegisterButBetter = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(initialValues);
+  const [formData, setFormData] = useState(initialData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +23,7 @@ const Register = () => {
       alert("All fields are required.");
       return;
     }
+    console.log(formData);
 
     fetch("http://localhost:5050/api/users/register", {
       method: "POST",
@@ -61,9 +62,11 @@ const Register = () => {
           Flip Card App
         </h1>
       </div>
+
       <div className="text-sm font-light text-[#6B7280] pb-8 ">
         Register for an account on Flip Card App
       </div>
+      <AvatarUploader formData={formData} setFormData={setFormData} />
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <div className="pb-2">
           <label
@@ -72,6 +75,7 @@ const Register = () => {
           >
             Name
           </label>
+
           <div className="relative text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
               <svg
@@ -90,15 +94,16 @@ const Register = () => {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
               </svg>
             </span>
+
             <input
               type="text"
               maxLength={20}
-              name="name"
-              id="name"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
+              name="name"
+              id="name"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
               placeholder="Your Name"
               autoComplete="off"
@@ -132,14 +137,11 @@ const Register = () => {
             </span>
             <input
               type="email"
+              id="email"
               value={formData.email}
               onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  email: e.target.value.toLowerCase(),
-                })
+                setFormData({ ...formData, email: e.target.value })
               }
-              id="email"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
               placeholder="Your Email"
               autoComplete="off"
@@ -153,6 +155,7 @@ const Register = () => {
           >
             Password
           </label>
+
           <div className="relative text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
               <svg
@@ -176,16 +179,34 @@ const Register = () => {
             <input
               type="password"
               name="password"
+              id="password"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
-              id="password"
               placeholder="••••••••••"
               className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
               autoComplete="new-password"
             />
           </div>
+        </div>
+        <div className="w-auto h-24 mx-auto">
+          <p>
+            Upload Files: <i>(max 5)</i>
+          </p>
+          <input
+            type="file"
+            name="files"
+            accept="file/*"
+            multiple
+            max="3"
+            id="avatar"
+            value={formData.moreData}
+            onChange={(e) =>
+              setFormData({ ...formData, moreData: e.target.value })
+            }
+            className="w-full h-full object-cover text-sm text-gray-900 cursor-pointer  focus:outline-none"
+          />
         </div>
         <button
           type="submit"
@@ -215,7 +236,7 @@ const Register = () => {
         <span className="flex-shrink mx-4 font-medium text-gray-500">OR</span>
         <div className="flex-grow border-t border-[1px] border-gray-200"></div>
       </div>
-      <form>
+      <form method="POST" encType="multipart/form-data">
         <div className="flex flex-row gap-2 justify-center">
           <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md hover:bg-[#26678b] text-gray-200">
             <svg
@@ -225,9 +246,9 @@ const Register = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokWidth="2"
+              stroklinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-github"
             >
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
@@ -243,9 +264,9 @@ const Register = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-twitter"
             >
               <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
@@ -258,4 +279,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterButBetter;

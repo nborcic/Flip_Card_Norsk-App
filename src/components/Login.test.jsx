@@ -26,7 +26,7 @@ describe("Login Component", () => {
       target: { value: "password" },
     });
 
-    expect(screen.getByLabelText(/Email/i).value).toBe("test@example.com");
+    expect(screen.getByLabelText(/Email/i).value).toBe("test@test.com");
     expect(screen.getByLabelText(/Password/i).value).toBe("password");
   });
 
@@ -38,7 +38,7 @@ describe("Login Component", () => {
     );
 
     fireEvent.change(screen.getByLabelText(/Email/i), {
-      target: { value: "test@example.com" },
+      target: { value: "test@test.com" },
     });
     fireEvent.change(screen.getByLabelText(/Password/i), {
       target: { value: "password" },
@@ -83,8 +83,8 @@ describe("Login Component", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "test@example.com",
-          password: "password",
+          email: "test@test.com",
+          password: "testPassword",
         }),
       });
     });

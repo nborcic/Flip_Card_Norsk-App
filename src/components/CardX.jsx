@@ -41,16 +41,6 @@ const CardX = ({ level }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const res = fetch(
-  //     "http://localhost:5050/api/words/66fa88c1df7923cefde696f2"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-
-  //       setFata(data.word);
-  //     });
-  // });
   // //position theme button
   // //min size of cardx
   // //after 3 secs of inactivity, flip card animation icon starts
@@ -117,7 +107,7 @@ const CardX = ({ level }) => {
             >
               {currentWord.word}
             </p>
-            {/* <p>{fata}</p> */}
+           
             <img
               src={flags.EN.path}
               className="h-16 w-16"

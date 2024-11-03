@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
 function InputList() {
-  const [items, setItems] = useState([]);
+  let initialItems = [
+    { id: 0, value: "onclick opens modal user details", status: "Not Done" },
+  ];
+
+  const [items, setItems] = useState(initialItems);
+
   const [inputValue, setInputValue] = useState("");
 
   // Load items from localStorage when the component mounts

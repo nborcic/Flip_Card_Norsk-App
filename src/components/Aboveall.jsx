@@ -5,12 +5,17 @@ import { themeContext } from "../App";
 import Switch from "@mui/material/Switch";
 import { IoLogInOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { clamp, motion } from "framer-motion";
+import { useTime } from "framer-motion";
+import { useTransform } from "framer-motion";
+import { useState } from "react";
 
 // //button signup navigates to sign up page
 
 const Aboveall = () => {
   const { theme, toggleTheme } = useContext(themeContext);
   const [checked, setChecked] = React.useState(true);
+  const [isIdle, setIsIdle] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -19,6 +24,13 @@ const Aboveall = () => {
   const handleSignIn = () => {
     navigate("/loginPage");
   };
+  const time = useTime();
+  const rotate = useTransform(
+    time,
+    [0, 6000], // For every 4 seconds...
+    [0, 360], // ...rotate 360deg
+    clamp(false) // Allow the value to exceed the defined range
+  );
 
   return (
     <div className=" h-[70px]  border border-black rounded flex justify-between items-center p-2 bg-orange-300">
@@ -34,14 +46,20 @@ const Aboveall = () => {
         />
       </div>
 
-      <p className="font-mono font-bold text-xl s:text-s">Flip To Know</p>
+      <div className="font-mono font-bold text-xl s:text-s flex flex-row">
+        {" "}
+        <motion.div animate={{ x: -10 }} style={{ rotate }}>
+          Flip
+        </motion.div>
+        To Know
+      </div>
+
       <div className="flex items-center">
         <Switch
           checked={checked}
           sx={{ color: theme === "light" ? "dark" : "light" }}
           onChange={handleChange}
           onClick={toggleTheme}
-          inputProps={{ "aria-label": "controlled" }}
         />
 
         <IconButtonMenu />

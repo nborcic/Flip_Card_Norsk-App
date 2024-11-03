@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import ToDo from "./ToDo";
+import { wrap } from "framer-motion";
 
 //table of usernames and emails from db
 const UserList = () => {
@@ -90,7 +91,10 @@ const UserList = () => {
   const tableDataStyle = {
     padding: "8px",
     textAlign: "left",
+    width: "20px",
+    border: "1px solid #ddd",
   };
+
   return (
     <div className="user-list">
       <table
@@ -98,6 +102,7 @@ const UserList = () => {
       >
         <thead>
           <tr>
+            <th style={tableHeaderStyle}>Icon</th>
             <th style={tableHeaderStyle}>Name</th>
             <th style={tableHeaderStyle}>Email</th>
             <th style={tableHeaderStyle}>Admin</th>
@@ -107,6 +112,16 @@ const UserList = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user._id} style={tableRowStyle}>
+              <td style={tableDataStyle}>
+                {user.userAvatar ? (
+                  <img src="user.userAvatar" alt="User Avatar" />
+                ) : (
+                  <img
+                    href="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                    alt="User Avatar"
+                  />
+                )}
+              </td>
               <td style={tableDataStyle}>{user.name}</td>
               <td style={tableDataStyle}>{user.email}</td>
               <td style={tableDataStyle}>{user.isAdmin ? "Yes" : "No"}</td>

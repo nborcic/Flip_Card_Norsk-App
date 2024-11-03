@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
 
 const router = express.Router();
 
@@ -10,7 +11,14 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false }
+    isAdmin: { type: Boolean, default: false },
+    userAvatar: { type: String, default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y' },
+    files: [
+        {
+            type: String,
+        },
+    ],
+
 });
 
 //TODO
@@ -116,25 +124,44 @@ async function getUser(req, res, next) {
     res.user = user;
     next();
 }
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "routes/usersAPIUploads/");
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
+const upload = multer({ storage: storage });
 
 // Register Endpoint - /users/register - name, email, password
-router.post('/register', async (req, res) => {
-    const { name, email, password } = req.body;
-
+router.post('/register', upload.array('userAvatar', 3), async (req, res) => {
+    const { name, email, password, userAvatar, files } = req.body;
+    if (!files || files.length === 0) {
+        return res.status(400).send({ message: "No files uploaded" });
+    }
     const userCount = await User.countDocuments();
-
     const isAdmin = userCount === 0;
 
     try {
         // Create a new user instance
-        const user = new User({ name, email, password, isAdmin });
+        const user = new User({
+            name,
+            email,
+            password,
+            isAdmin,
+            userAvatar,
+            files,
+        });
+
+
 
         // Save to the database (pre-save hook for hash password)
         await user.save();
         res.status(201).send({ success: true, message: isAdmin ? 'Admin user created successfully' : 'User created successfully' });
     } catch (error) {
-        console.error("Registration error:", error);
-        res.status(400).send({ success: false, error: error.message || 'User registration failed' });
+        console.error("Registration errorR:", error);
+        res.status(400).send({ success: false, error: error.message || 'User registration failedD' });
     }
 });
 
@@ -148,7 +175,6 @@ router.post('/login', async (req, res) => {
             console.log("User not found for email:", email);
             return res.status(404).send({ error: 'User not found' });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             console.log("Password mismatch for email:", email);
