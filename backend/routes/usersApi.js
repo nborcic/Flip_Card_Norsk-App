@@ -12,19 +12,9 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
-    userAvatar: { type: String, default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y' },
-    files: [
-        {
-            type: String,
-        },
-    ],
+    file: { type: String, default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y' },
 
 });
-
-//TODO
-//wrong answers structure define 
-//isAdmin field in UserSchema
-
 
 // Pre-save to hash password
 UserSchema.pre('save', async function (next) {
@@ -63,10 +53,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-
 const blacklistedTokens = []; // blacklisted tokens after logoff
-
-
 
 router.post('/api/logout', authenticateToken, (req, res) => {
     const authHeader = req.headers['authorization'];
@@ -84,7 +71,6 @@ router.delete('/:id', authenticateToken, getUser, async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
 
         console.log("User deleted", user);
 
@@ -124,22 +110,34 @@ async function getUser(req, res, next) {
     res.user = user;
     next();
 }
+
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "routes/usersAPIUploads/");
+    destination: function (cb) {
+        cb(null, "/routes/usersAPIUploads/");
     },
-    filename: function (req, file, cb) {
+    filename: function (_, file, cb) {
         cb(null, file.originalname);
     },
 });
 const upload = multer({ storage: storage });
 
-// Register Endpoint - /users/register - name, email, password
-router.post('/register', upload.array('userAvatar', 3), async (req, res) => {
-    const { name, email, password, userAvatar, files } = req.body;
-    if (!files || files.length === 0) {
-        return res.status(400).send({ message: "No files uploaded" });
+// Validation Middleware
+const validateUser = (req, res, next) => {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+        return res.status(400).send({ message: "All fields are required" });
     }
+    next();
+};
+
+// Register Endpoint - /users/register - name, email, password
+router.post('/register', upload.single('file'), validateUser, async (req, res) => {
+    const { name, email, password } = req.body;
+    console.log('req.file:', req.file); // Debugging statement
+    console.log('req.body:', req.body); // Debugging statement
+
+    const userAvatar = req.file?.filename;
+
     const userCount = await User.countDocuments();
     const isAdmin = userCount === 0;
 
@@ -150,24 +148,22 @@ router.post('/register', upload.array('userAvatar', 3), async (req, res) => {
             email,
             password,
             isAdmin,
-            userAvatar,
-            files,
+            file: userAvatar,
         });
-
-
 
         // Save to the database (pre-save hook for hash password)
         await user.save();
         res.status(201).send({ success: true, message: isAdmin ? 'Admin user created successfully' : 'User created successfully' });
     } catch (error) {
-        console.error("Registration errorR:", error);
-        res.status(400).send({ success: false, error: error.message || 'User registration failedD' });
+        console.error("Registration error:", error);
+        res.status(400).send({ success: false, error: error.message || 'User registration failed' });
     }
 });
 
+
+
 // Login Endpoint
 router.post('/login', async (req, res) => {
-
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
@@ -188,6 +184,5 @@ router.post('/login', async (req, res) => {
         res.status(500).send({ error: 'Login failed' });
     }
 });
-
 
 export default router;

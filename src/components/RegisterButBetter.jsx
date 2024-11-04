@@ -6,31 +6,35 @@ import { Link } from "react-router-dom";
 import { AvatarUploader } from "../Assets/data/utilsData";
 
 export const initialData = {
-  userAvatar: "",
+  avatar: "",
   name: "",
   email: "",
   password: "",
-  files: "",
 };
+
 const RegisterButBetter = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //  frontend validation
+    // Frontend validation
     if (!formData.name || !formData.email || !formData.password) {
       alert("All fields are required.");
       return;
     }
-    console.log(formData);
+
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("password", formData.password);
+    if (formData.avatar) {
+      data.append("file", formData.avatar);
+    }
 
     fetch("http://localhost:5050/api/users/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      body: data,
     })
       .then((response) => {
         if (!response.ok) {
@@ -50,6 +54,10 @@ const RegisterButBetter = () => {
         console.error("Error:", error);
         alert("An error occurred during registration.");
       });
+
+    const handleFileChange = (e) => {
+      setFormData({ ...formData, avatar: e.target.files[0] });
+    };
   };
 
   return (
@@ -66,7 +74,39 @@ const RegisterButBetter = () => {
       <div className="text-sm font-light text-[#6B7280] pb-8 ">
         Register for an account on Flip Card App
       </div>
-      <AvatarUploader formData={formData} setFormData={setFormData} />
+      <div>
+        <h1>{formData.avatar ? "" : "Upload Avatar"}</h1>
+        {formData.avatar ? (
+          <div className="relative auto h-24 justify-center flex ">
+            <img
+              src={URL.createObjectURL(formData.avatar)}
+              alt="Profile"
+              className=" rounded-xl object-cover hover:scale-105 transition-all"
+            />
+            <input type="hidden" name="avatar" value={formData.avatar} />
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, avatar: null })}
+              className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600"
+            >
+              X
+            </button>
+          </div>
+        ) : (
+          <div>
+            <input
+              type="file"
+              name="file"
+              id="avatar"
+              accept="image/*"
+              onChange={(e) =>
+                setFormData({ ...formData, avatar: e.target.files[0] })
+              }
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            />
+          </div>
+        )}
+      </div>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <div className="pb-2">
           <label
@@ -190,26 +230,10 @@ const RegisterButBetter = () => {
             />
           </div>
         </div>
-        <div className="w-auto h-24 mx-auto">
-          <p>
-            Upload Files: <i>(max 5)</i>
-          </p>
-          <input
-            type="file"
-            name="files"
-            accept="file/*"
-            multiple
-            max="3"
-            id="avatar"
-            value={formData.moreData}
-            onChange={(e) =>
-              setFormData({ ...formData, moreData: e.target.value })
-            }
-            className="w-full h-full object-cover text-sm text-gray-900 cursor-pointer  focus:outline-none"
-          />
-        </div>
+
         <button
           type="submit"
+          onClick={(e) => handleSubmit(e)}
           className="w-full text-[#FFFFFF] bg-[#4F46E5] hover:bg-[#36347a] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
         >
           Sign Up
@@ -246,7 +270,7 @@ const RegisterButBetter = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokWidth="2"
+              strokeWidth="2"
               stroklinecap="round"
               strokeLinejoin="round"
               className="lucide lucide-github"
