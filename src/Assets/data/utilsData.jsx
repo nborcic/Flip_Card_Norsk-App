@@ -1,37 +1,63 @@
-export const AvatarUploader = ({ formData, setFormData }) => (
-  <div>
-    <h1>{formData.avatar ? "" : "Upload Avatar"}</h1>
-    {formData.avatar ? (
-      <div className="relative auto h-24 justify-center flex ">
-        <img
-          src={URL.createObjectURL(formData.avatar)}
-          alt="Profile"
-          className=" rounded-xl object-cover hover:scale-105 transition-all"
-        />
-        <input type="hidden" name="avatar" value={formData.avatar} />
-        <button
-          type="button"
-          onClick={() => setFormData({ ...formData, avatar: null })}
-          className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600"
-        >
-          X
-        </button>
-      </div>
-    ) : (
-      <div>
-        <input
-          type="file"
-          name="avatar"
-          id="avatar"
-          accept="image/*"
-          onChange={(e) =>
-            setFormData({ ...formData, avatar: e.target.files[0] })
-          }
-          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-        />
-      </div>
-    )}
-  </div>
-);
+export const sendData = async (url, dataToSend, method = "POST") => {
+  try {
+    const response = await fetch(url, {
+      method: method, //  POST, PUT, DELETE...
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
-export default AvatarUploader;
+export const getData = async (url, dataToGet, method = "GET") => {
+  try {
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToGet),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+// const { data, loading, error } = useFetch('https://api.example.com/data');
+//   return (
+//     <div>
+//       {loading ? 'Loading...' : error ? `Error: ${error}` : JSON.stringify(data)}
+//     </div>
+export const tableStyles = {
+  tableHeaderStyle: {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "8px",
+    textAlign: "left",
+    borderBottom: "2px solid #ddd",
+  },
+
+  tableRowStyle: {
+    borderBottom: "1px solid #ddd",
+  },
+
+  tableDataStyle: {
+    padding: "8px",
+    textAlign: "left",
+    width: "20px",
+    border: "1px solid #ddd",
+  },
+};

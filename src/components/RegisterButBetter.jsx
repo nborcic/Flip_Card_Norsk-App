@@ -3,10 +3,9 @@ import { CgEditFlipH } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AvatarUploader } from "../Assets/data/utilsData";
 
 export const initialData = {
-  avatar: "",
+  avatar: null,
   name: "",
   email: "",
   password: "",
@@ -20,44 +19,34 @@ const RegisterButBetter = () => {
     e.preventDefault();
     // Frontend validation
     if (!formData.name || !formData.email || !formData.password) {
-      alert("All fields are required.");
+      alert("All fields are required");
       return;
     }
-
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
     data.append("password", formData.password);
     if (formData.avatar) {
-      data.append("file", formData.avatar);
+      data.append("avatar", formData.avatar);
     }
-
     fetch("http://localhost:5050/api/users/register", {
       method: "POST",
       body: data,
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           alert("Registration Successful");
+          setFormData(initialData);
           navigate("/loginPage");
         } else {
-          alert("Registration Failed");
+          alert(data.message || "Registration Failed");
         }
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("An error occurred during registration.");
+        alert("An error occurred. Please try again.");
       });
-
-    const handleFileChange = (e) => {
-      setFormData({ ...formData, avatar: e.target.files[0] });
-    };
   };
 
   return (
@@ -74,40 +63,45 @@ const RegisterButBetter = () => {
       <div className="text-sm font-light text-[#6B7280] pb-8 ">
         Register for an account on Flip Card App
       </div>
-      <div>
-        <h1>{formData.avatar ? "" : "Upload Avatar"}</h1>
-        {formData.avatar ? (
-          <div className="relative auto h-24 justify-center flex ">
-            <img
-              src={URL.createObjectURL(formData.avatar)}
-              alt="Profile"
-              className=" rounded-xl object-cover hover:scale-105 transition-all"
-            />
-            <input type="hidden" name="avatar" value={formData.avatar} />
-            <button
-              type="button"
-              onClick={() => setFormData({ ...formData, avatar: null })}
-              className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600"
-            >
-              X
-            </button>
-          </div>
-        ) : (
-          <div>
-            <input
-              type="file"
-              name="file"
-              id="avatar"
-              accept="image/*"
-              onChange={(e) =>
-                setFormData({ ...formData, avatar: e.target.files[0] })
-              }
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-            />
-          </div>
-        )}
-      </div>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
+
+      <form
+        className="flex flex-col"
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
+        <div>
+          <h1>{formData.avatar ? "" : "Upload Avatar"}</h1>
+          {formData.avatar ? (
+            <div className="relative auto h-24 justify-center flex ">
+              <img
+                src={URL.createObjectURL(formData.avatar)}
+                alt="Profile"
+                className="rounded-xl object-cover hover:scale-105 transition-all"
+              />
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, avatar: null })}
+                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600"
+              >
+                X
+              </button>
+            </div>
+          ) : (
+            <div>
+              <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                accept="image/*"
+                onChange={(e) =>
+                  setFormData({ ...formData, avatar: e.target.files[0] })
+                }
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+              />
+            </div>
+          )}
+        </div>
+
         <div className="pb-2">
           <label
             htmlFor="name"
@@ -118,20 +112,21 @@ const RegisterButBetter = () => {
 
           <div className="relative text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+              {/* User Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="icon icon-mail"
+                className="icon icon-user"
               >
-                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                <path d="M20 21v-2a4 4 0 00-3-3.87" />
+                <path d="M4 21v-2a4 4 0 013-3.87" />
+                <circle cx="12" cy="7" r="4" />
               </svg>
             </span>
 
@@ -144,7 +139,7 @@ const RegisterButBetter = () => {
               }
               name="name"
               id="name"
-              className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
+              className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
               placeholder="Your Name"
               autoComplete="off"
             />
@@ -159,30 +154,31 @@ const RegisterButBetter = () => {
           </label>
           <div className="relative text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+              {/* Mail Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="lucide lucide-mail"
+                className="icon icon-mail"
               >
                 <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                <path d="M22 7L12 13 2 7"></path>
               </svg>
             </span>
             <input
               type="email"
+              name="email"
               id="email"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
+              className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
               placeholder="Your Email"
               autoComplete="off"
             />
@@ -198,22 +194,20 @@ const RegisterButBetter = () => {
 
           <div className="relative text-gray-400">
             <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+              {/* Lock Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="icon icon-square-asterisk"
+                className="icon icon-lock"
               >
-                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                <path d="M12 8v8"></path>
-                <path d="m8.5 14 7-4"></path>
-                <path d="m8.5 10 7 4"></path>
+                <rect width="18" height="11" x="3" y="11" rx="2"></rect>
+                <path d="M7 11V7a5 5 0 0110 0v4"></path>
               </svg>
             </span>
             <input
@@ -225,7 +219,7 @@ const RegisterButBetter = () => {
                 setFormData({ ...formData, password: e.target.value })
               }
               placeholder="••••••••••"
-              className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
+              className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 py-3 px-4"
               autoComplete="new-password"
             />
           </div>
@@ -233,7 +227,6 @@ const RegisterButBetter = () => {
 
         <button
           type="submit"
-          onClick={(e) => handleSubmit(e)}
           className="w-full text-[#FFFFFF] bg-[#4F46E5] hover:bg-[#36347a] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
         >
           Sign Up
@@ -248,56 +241,14 @@ const RegisterButBetter = () => {
         <div className="text-sm font-light text-[#6B7280] ">
           Already have an account?{" "}
           <Link
-            onClick={() => navigate("/loginPage")}
+            to="/loginPage"
             className="font-medium text-[#4F46E5] hover:underline hover:pointer"
           >
             Login
           </Link>
         </div>
-      </form>
-      <div className="relative flex py-8 items-center">
-        <div className="flex-grow border-t border-[1px] border-gray-200"></div>{" "}
-        <span className="flex-shrink mx-4 font-medium text-gray-500">OR</span>
-        <div className="flex-grow border-t border-[1px] border-gray-200"></div>
-      </div>
-      <form method="POST" encType="multipart/form-data">
-        <div className="flex flex-row gap-2 justify-center">
-          <button className="flex flex-row w-32 gap-2 bg-gray-600 p-2 rounded-md hover:bg-[#26678b] text-gray-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              stroklinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-github"
-            >
-              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-              <path d="M9 18c-4.51 2-5-2-7-2"></path>
-            </svg>{" "}
-            <span className="font-medium mx-auto">Github</span>
-          </button>
-          <button className="flex flex-row w-32 gap-2 bg-gray-600 hover:bg-[#26678b] p-2 rounded-md text-gray-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-twitter"
-            >
-              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-            </svg>{" "}
-            <span className="font-medium mx-auto">Twitter</span>
-          </button>
-        </div>
+
+        {/* ...Social media buttons... */}
       </form>
     </div>
   );

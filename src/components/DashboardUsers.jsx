@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import ToDo from "./ToDo";
-import { wrap } from "framer-motion";
+import { tableStyles } from "../Assets/data/utilsData";
+const { tableHeaderStyle, tableRowStyle, tableDataStyle } = tableStyles;
 
 //table of usernames and emails from db
 const UserList = () => {
@@ -76,24 +77,6 @@ const UserList = () => {
       setError(error.message);
     }
   };
-  const tableHeaderStyle = {
-    backgroundColor: "#4CAF50",
-    color: "white",
-    padding: "8px",
-    textAlign: "left",
-    borderBottom: "2px solid #ddd",
-  };
-
-  const tableRowStyle = {
-    borderBottom: "1px solid #ddd",
-  };
-
-  const tableDataStyle = {
-    padding: "8px",
-    textAlign: "left",
-    width: "20px",
-    border: "1px solid #ddd",
-  };
 
   return (
     <div className="user-list">
@@ -102,8 +85,8 @@ const UserList = () => {
       >
         <thead>
           <tr>
-            <th style={tableHeaderStyle}>Icon</th>
-            <th style={tableHeaderStyle}>Name</th>
+            <th style={tableStyles.tableHeaderStyle}>Icon</th>
+            <th style={tableStyles.tableHeaderStyle}>Name</th>
             <th style={tableHeaderStyle}>Email</th>
             <th style={tableHeaderStyle}>Admin</th>
             <th style={tableHeaderStyle}>Delete</th>
@@ -122,7 +105,7 @@ const UserList = () => {
                   />
                 )}
               </td>
-              <td style={tableDataStyle}>{user.name}</td>
+              <td style={tableStyles.tableDataStyle}>{user.name}</td>
               <td style={tableDataStyle}>{user.email}</td>
               <td style={tableDataStyle}>{user.isAdmin ? "Yes" : "No"}</td>
               <td

@@ -42,6 +42,11 @@ const router = createBrowserRouter([
     element: <RegisterButBetter />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/register",
+    element: <Register />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

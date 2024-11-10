@@ -106,6 +106,7 @@ const CustomCheckbox = ({ setLevel }) => {
         </div>
       </div>
       <div className="text-3xl relative">
+        {/*replace by icons for coresponding size  */}
         {windowWidth > 375 ? <FaMobileAlt /> : null}
       </div>
     </div>

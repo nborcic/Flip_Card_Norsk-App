@@ -3,17 +3,21 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
+import path from 'path';
+import __dirname from 'path';
+import Whitelist from './whiteList.js';
+
+
 
 const router = express.Router();
 
 // User Schema
 const UserSchema = new mongoose.Schema({
-    name: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
-    file: { type: String, default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y' },
-
+    avatar: { type: String },
 });
 
 // Pre-save to hash password
@@ -110,56 +114,53 @@ async function getUser(req, res, next) {
     res.user = user;
     next();
 }
-
 const storage = multer.diskStorage({
-    destination: function (cb) {
-        cb(null, "/routes/usersAPIUploads/");
+    destination: function (req, file, cb) {
+        const destPath = path.join(__dirname, '../images/');
+        console.log('Multer destination path:', destPath);
+        cb(null, destPath);
     },
-    filename: function (_, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, file.originalname);
-    },
+    }
 });
-const upload = multer({ storage: storage });
+
+const upload = multer({ storage });
 
 // Validation Middleware
-const validateUser = (req, res, next) => {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-        return res.status(400).send({ message: "All fields are required" });
-    }
-    next();
-};
-
-// Register Endpoint - /users/register - name, email, password
-router.post('/register', upload.single('file'), validateUser, async (req, res) => {
-    const { name, email, password } = req.body;
-    console.log('req.file:', req.file); // Debugging statement
-    console.log('req.body:', req.body); // Debugging statement
-
-    const userAvatar = req.file?.filename;
-
-    const userCount = await User.countDocuments();
-    const isAdmin = userCount === 0;
-
+router.post('/register', upload.single('avatar'), async (req, res) => {
     try {
-        // Create a new user instance
+        const { name, email, password } = req.body;
+        const avatarFile = req.file;
+
+        // Validate input data
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
+        const avatarUrl = avatarFile ? `/images/${avatarFile.filename}` : undefined;
+        // Create new user instance
         const user = new User({
             name,
             email,
             password,
-            isAdmin,
-            file: userAvatar,
+            avatar: avatarFile ? avatarUrl : undefined,
         });
 
-        // Save to the database (pre-save hook for hash password)
+        // Save user to database
         await user.save();
-        res.status(201).send({ success: true, message: isAdmin ? 'Admin user created successfully' : 'User created successfully' });
+
+        res.status(201).json({ success: true, message: 'User registered successfully' });
     } catch (error) {
-        console.error("Registration error:", error);
-        res.status(400).send({ success: false, error: error.message || 'User registration failed' });
+        console.error('Registration error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
     }
 });
-
 
 
 // Login Endpoint
