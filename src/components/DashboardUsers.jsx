@@ -55,7 +55,7 @@ const UserList = () => {
   const deleteUser = async (userId) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setError("No token found. Please log in.");
+      setError("Please login to manage users.(No token found.)");
       return;
     }
     try {
@@ -85,8 +85,8 @@ const UserList = () => {
       >
         <thead>
           <tr>
-            <th style={tableStyles.tableHeaderStyle}>Icon</th>
-            <th style={tableStyles.tableHeaderStyle}>Name</th>
+            <th style={tableHeaderStyle}>Icon</th>
+            <th style={tableHeaderStyle}>Name</th>
             <th style={tableHeaderStyle}>Email</th>
             <th style={tableHeaderStyle}>Admin</th>
             <th style={tableHeaderStyle}>Delete</th>

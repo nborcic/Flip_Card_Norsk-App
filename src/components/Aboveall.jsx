@@ -1,20 +1,14 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import IconButtonMenu from "./IconButtonMenu";
-import { useContext } from "react";
-import { themeContext } from "../App";
+import { ThemeContext } from "../App"; // Correct import with the correct name
 import Switch from "@mui/material/Switch";
 import { IoLogInOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { clamp, motion } from "framer-motion";
-import { useTime } from "framer-motion";
-import { useTransform } from "framer-motion";
-import { useState } from "react";
-
-// //button signup navigates to sign up page
+import { clamp, motion, useTime, useTransform } from "framer-motion";
 
 const Aboveall = () => {
-  const { theme, toggleTheme } = useContext(themeContext);
-  const [checked, setChecked] = React.useState(true);
+  const { theme, toggleTheme } = useContext(ThemeContext); // Use ThemeContext correctly here
+  const [checked, setChecked] = useState(true);
   const [isIdle, setIsIdle] = useState(false);
   const navigate = useNavigate();
 
@@ -33,11 +27,11 @@ const Aboveall = () => {
   );
 
   return (
-    <div className=" h-[70px]  border border-black rounded flex justify-between items-center p-2 bg-orange-300">
+    <div className=" h-[70px] border border-black rounded flex justify-between items-center p-2 bg-orange-300">
       <div className="flex items-center">
         <img
           src="src/images/icon_navBar_noBack.webp"
-          className="rounded-xl h-[50px] w-[50px] "
+          className="rounded-xl h-[50px] w-[50px]"
           alt="userIcon"
         />
         <IoLogInOutline
@@ -47,7 +41,6 @@ const Aboveall = () => {
       </div>
 
       <div className="font-mono font-bold text-xl s:text-s flex flex-row">
-        {" "}
         <motion.div animate={{ x: -10 }} style={{ rotate }}>
           Flip
         </motion.div>
@@ -61,7 +54,6 @@ const Aboveall = () => {
           onChange={handleChange}
           onClick={toggleTheme}
         />
-
         <IconButtonMenu />
       </div>
     </div>

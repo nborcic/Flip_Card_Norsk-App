@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DashboardUsers from "./DashboardUsers";
 import { tableStyles } from "../Assets/data/utilsData";
 const { tableHeaderStyle, tableRowStyle, tableDataStyle } = tableStyles;
-import { getData } from "../Assets/data/utilsData";
+
 
 const AdminDashboard = () => {
   const [makeNewUser, setmakeNewUser] = React.useState("");
@@ -16,14 +16,17 @@ const AdminDashboard = () => {
     localStorage.removeItem("token");
     navigate("/loginPage");
   };
+
   const handleMoreWords = () => {
     navigate("/addMoreWords");
   };
-  const handleAddNewUser = () => {};
- 
+  const handleAddNewUser = () => {
+    //POSt request to add new user to whitelist
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white  shadow-md rounded-lg p-6 max-w-md w-full">
         <Typography
           variant="h4"
           gutterBottom

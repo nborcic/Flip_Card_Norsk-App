@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import multer from 'multer';
 import path from 'path';
 import __dirname from 'path';
-import Whitelist from './whiteList.js';
+
 
 
 
@@ -62,6 +62,7 @@ const blacklistedTokens = []; // blacklisted tokens after logoff
 router.post('/api/logout', authenticateToken, (req, res) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
+    localStorage.removeItem('token');
 
     // Add the token to the blacklistedTokens
     blacklistedTokens.push(token);
@@ -137,7 +138,7 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-        
+
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
@@ -178,6 +179,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).send({ error: 'Invalid credentials' });
         }
 
+       
         const token = jwt.sign({ _id: user._id }, process.env.MY_SECRET, { expiresIn: '1h' });
         res.send({ token });
     } catch (error) {
