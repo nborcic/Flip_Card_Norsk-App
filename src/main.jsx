@@ -60,6 +60,7 @@ const router = createBrowserRouter(
   {
     future: {
       v7_startTransition: true, //v7 optimization for faster rendering, not needed for v6, added 13.11.2024
+      v7_skipActionErrorRevalidation: true, // Opt-in to skip revalidation after 4xx/5xx action responses, added 15.11.2024
     },
   }
 );

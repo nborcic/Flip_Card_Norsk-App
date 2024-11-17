@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     console.log("current token state", localStorage.getItem("token"));
+    
     setIsAuthenticated(false);
   };
 

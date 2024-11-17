@@ -48,6 +48,7 @@ export const tableStyles = {
     padding: "8px",
     textAlign: "left",
     borderBottom: "2px solid #ddd",
+    width: "100%",
   },
 
   tableRowStyle: {

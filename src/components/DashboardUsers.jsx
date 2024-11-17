@@ -97,11 +97,11 @@ const UserList = () => {
             <tr key={user._id} style={tableRowStyle}>
               <td style={tableDataStyle}>
                 {user.userAvatar ? (
-                  <img src="user.userAvatar" alt="User Avatar" />
+                  <img src="user.userAvatar" alt="Avatar" />
                 ) : (
                   <img
                     href="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                    alt="User Avatar"
+                    alt="Avatar"
                   />
                 )}
               </td>

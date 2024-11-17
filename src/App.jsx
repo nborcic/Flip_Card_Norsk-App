@@ -67,7 +67,7 @@ const App = () => {
   };
 
   return (
-    <motion.div variants={shakeVariants} animate={isIdle ? "shake" : ""}>
+    <motion.div style={styles} variants={shakeVariants} animate={isIdle ? "shake" : ""}>
       <ThemeContext.Provider value={value}>
         <Routes>
           {/* main content */}
@@ -75,7 +75,7 @@ const App = () => {
             path="/"
             element={
               <div
-                style={styles}
+               
                 className="flex justify-center items-center m-auto max-w-[720px]"
               >
                 <div className="shadow m-2 max-w-[720px]">
