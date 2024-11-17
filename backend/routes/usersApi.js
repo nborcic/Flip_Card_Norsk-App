@@ -178,10 +178,9 @@ router.post('/login', async (req, res) => {
             console.log("Password mismatch for email:", email);
             return res.status(400).send({ error: 'Invalid credentials' });
         }
-
-       
         const token = jwt.sign({ _id: user._id }, process.env.MY_SECRET, { expiresIn: '1h' });
-        res.send({ token });
+
+        res.send({ token, name: user.name });
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).send({ error: 'Login failed' });

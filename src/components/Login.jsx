@@ -33,8 +33,8 @@ const Login = () => {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("token", data.token);
-          // console.log("Token:", data.token); Testing token
-
+          //console.log("Token:", data.token); //Testing token
+          localStorage.setItem("loggedAdmin", data.name);
           navigate("/admin/");
         } else {
           alert("Login failed");
@@ -44,8 +44,7 @@ const Login = () => {
         console.error("Error:", error);
       });
 
-    setEmail("");
-    setPassword("");
+    
   };
 
   return (

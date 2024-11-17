@@ -5,13 +5,15 @@ import Switch from "@mui/material/Switch";
 import { IoLogInOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { clamp, motion, useTime, useTransform } from "framer-motion";
+import { MdDashboard } from "react-icons/md";
+import { useAuth } from "../Assets/data/AuthContext";
 
 const Aboveall = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext); // Use ThemeContext correctly here
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [checked, setChecked] = useState(true);
   const [isIdle, setIsIdle] = useState(false);
   const navigate = useNavigate();
-
+  const { isAuthenticated } = useAuth();
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
@@ -34,10 +36,18 @@ const Aboveall = () => {
           className="rounded-xl h-[50px] w-[50px]"
           alt="userIcon"
         />
-        <IoLogInOutline
-          className="text-3xl cursor-pointer z-10"
-          onClick={handleSignIn}
-        />
+        {!isAuthenticated ? (
+          <IoLogInOutline
+            className="text-3xl cursor-pointer z-10"
+            onClick={handleSignIn}
+          />
+        ) : null}
+        {isAuthenticated ? (
+          <MdDashboard
+            className="text-3xl cursor-pointer ml-4"
+            onClick={() => navigate("/admin")}
+          />
+        ) : null}
       </div>
 
       <div className="font-mono font-bold text-xl s:text-s flex flex-row">

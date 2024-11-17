@@ -7,8 +7,8 @@ import { tableStyles } from "../Assets/data/utilsData";
 const { tableHeaderStyle, tableRowStyle, tableDataStyle } = tableStyles;
 
 const AdminDashboard = () => {
+  const loggedAdmin = localStorage.getItem("loggedAdmin");
   const [makeNewUser, setmakeNewUser] = React.useState("");
-  const [users, setUsers] = React.useState([]);
 
   const [whiteListedUsers, setwhiteListedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,33 +48,36 @@ const AdminDashboard = () => {
       setError(error.message);
     }
   };
-  const handleNewWhitelistSubmit = (e) => {
-    const token = localStorage.getItem("token");
-
+  const handleNewWhitelistSubmit = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:5050/api/whitelist/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add user to whitelistT!");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setwhiteListedUsers((prevUsers) => [...prevUsers, data]);
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("Please login to add users to the whitelist. (No token found.)");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5050/api/whitelist/add/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ email: makeNewUser }),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to add user to whitelist!");
+      }
+
+      const data = await response.json();
+      setwhiteListedUsers((prevUsers) => [...prevUsers, data]);
+      setmakeNewUser("");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -101,7 +104,8 @@ const AdminDashboard = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [whiteListedUsers]);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white  shadow-md rounded-lg p-6 max-w-md w-full">
@@ -110,7 +114,9 @@ const AdminDashboard = () => {
           gutterBottom
           className="text-center text-blue-600"
         >
-          Admin Dashboard
+          Welcome to the Admin Dashboard 🚀
+          <br />
+          <span className="text-red-500 underline">{loggedAdmin}</span>
         </Typography>
         <Typography
           variant="body1"
@@ -129,22 +135,24 @@ const AdminDashboard = () => {
           >
             Whitelisted Users
           </Typography>
-          <form onSubmit={handleNewWhitelistSubmit} className="flex pb-1">
+          <form
+            onSubmit={handleNewWhitelistSubmit}
+            className="flex flex-row rounded-md mt-1 mb-1  "
+          >
             <input
-              className="border border-gray-300 rounded-md p-2 w-full left-10 hover:border-gray-500"
-              type="text"
-              placeholder="Add users to whitelist"
+              type="email"
               value={makeNewUser}
               onChange={(e) => setmakeNewUser(e.target.value)}
+              placeholder="Enter email to whitelist"
+              className="border border-gray-400 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              required
             />
-            <buttons
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer ml-2"
+            <button
               type="submit"
-              onClick={handleNewWhitelistSubmit}
-              value="Add User"
+              className=" bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded ml-2"
             >
-              Add
-            </buttons>
+              Add to Whitelist
+            </button>
           </form>
           {loading && (
             <p className="text-blue-600 text-2xl mt-4 flex justify-center ">
@@ -202,10 +210,10 @@ const AdminDashboard = () => {
             </button>
             <button
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => handleMoreWords()}
+              onClick={() => navigate("/admin/chartLogs")}
             >
               {" "}
-              Add more words
+              Logs
             </button>
           </div>
         </div>

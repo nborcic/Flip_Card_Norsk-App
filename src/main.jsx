@@ -9,6 +9,7 @@ import Register from "./components/Register.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
 import RegisterButBetter from "./components/RegisterButBetter.jsx";
+import ChartLogs from "./components/chartLogs.jsx";
 import PrivateRoute from "./Assets/data/PrivateRoutes.jsx";
 import { AuthProvider } from "./Assets/data/AuthContext.jsx";
 //apon login save tokan in localstorage, if token dashboard, if not login
@@ -45,7 +46,15 @@ const router = createBrowserRouter(
       ),
       errorElement: <ErrorPage />,
     },
-
+    {
+      path: "/admin/chartLogs/",
+      element: (
+        <PrivateRoute>
+          <ChartLogs />
+        </PrivateRoute>
+      ),
+      errorElement: <ErrorPage />,
+    },
     {
       path: "/RegisterButBetter",
       element: <RegisterButBetter />,

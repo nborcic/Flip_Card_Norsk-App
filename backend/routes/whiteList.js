@@ -41,7 +41,7 @@ router.get('/', authenticateToken, async (req, res) => {
 });
 
 // Add a new email to the whitelist
-router.post('/add', authenticateToken, async (req, res) => {
+router.post('/add/', authenticateToken, async (req, res) => {
     const { email } = req.body;
     if (!email) {
         return res.status(400).send({ error: 'Email is required' });
@@ -50,12 +50,11 @@ router.post('/add', authenticateToken, async (req, res) => {
         // Check if the email already exists
         const exists = await Whitelist.findOne({ email });
         if (exists) {
-            alert("Email already in whitelist");
             return res.status(400).send({ message: 'Email already in whitelist' });
         }
         const whitelist = new Whitelist({ email });
+
         await whitelist.save();
-        alert("User added to whitelist");
         res.status(201).send({ message: 'User added to whitelist' });
     } catch (error) {
         res.status(400).send({ error: 'Error adding user to whitelist' });

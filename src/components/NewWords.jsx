@@ -26,14 +26,12 @@ const NewWords = () => {
   const varrrr1 = wordList[thirdRandom].variations[1];
   const varrrr2 = wordList[thirdRandom].variations[2];
 
-  
-
   return (
     <div>
       <div
         style={{
           ...styles,
-          backgroundColor: theme === "light" ? "rgb(209, 209, 101)" : "white",
+          backgroundColor: theme === "light" ? "rgb(44, 209, 246)" : "white",
         }}
         className="flex justify-center items-center rounded  p-2  border flex-col border-black bg-emerald-100"
       >
@@ -74,7 +72,7 @@ const NewWords = () => {
             {defff}
           </p>
         </section>
-    
+
         <section>
           <li>{varrrr0}</li>
           <li>{varrrr1}</li>

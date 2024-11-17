@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import ToDo from "./ToDo";
 import { tableStyles } from "../Assets/data/utilsData";
 const { tableHeaderStyle, tableRowStyle, tableDataStyle } = tableStyles;
@@ -9,6 +8,8 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -105,7 +106,7 @@ const UserList = () => {
                   />
                 )}
               </td>
-              <td style={tableStyles.tableDataStyle}>{user.name}</td>
+              <td style={tableDataStyle}>{user.name}</td>
               <td style={tableDataStyle}>{user.email}</td>
               <td style={tableDataStyle}>{user.isAdmin ? "Yes" : "No"}</td>
               <td
