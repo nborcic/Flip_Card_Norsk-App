@@ -96,6 +96,8 @@ const AdminDashboard = () => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
+        
         setwhiteListedUsers(data);
       })
       .catch((error) => {
@@ -154,7 +156,7 @@ const AdminDashboard = () => {
               Add to Whitelist
             </button>
           </form>
-          {loading && (
+          {!loading && (
             <p className="text-blue-600 text-2xl mt-4 flex justify-center ">
               Loading...
             </p>

@@ -5,9 +5,7 @@ import jwt from 'jsonwebtoken';
 import multer from 'multer';
 import path from 'path';
 import __dirname from 'path';
-
-
-
+import Whitelist from './whiteList.js';
 
 const router = express.Router();
 
@@ -39,6 +37,8 @@ const User = mongoose.model('User', UserSchema);
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
+
+
 
     if (token == null) {
         return res.status(401).send({ error: 'Unauthorized' });
@@ -138,7 +138,10 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-
+        const whitelistd = await Whitelist.findOne({ email });
+        if (!whitelistd) {
+            return res.status(400).json({ message: 'User not whitelisted' });
+        }
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });

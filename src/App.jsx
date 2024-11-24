@@ -26,6 +26,7 @@ const App = () => {
     backgroundColor:
       theme === "light" ? "rgb(201, 222, 250)" : "rgb(255,255,255)",
     color: theme === "light" ? "rgb(0, 0, 0)" : "rgb(0, 0, 0)",
+    transition: "background-color 0.3s ease-in-out, color 0.3s ease-in-out",
   };
 
   const value = {
@@ -61,23 +62,24 @@ const App = () => {
 
   const shakeVariants = {
     shake: {
-      x: [0, -10, 10, -10, 10, 0], // Movement pattern for shake
+      // x: [0, -10, 10, -10, 10, 0], // Movement pattern for shake
       transition: { duration: 0.5, repeat: 2, ease: "easeInOut" },
     },
   };
 
   return (
-    <motion.div style={styles} variants={shakeVariants} animate={isIdle ? "shake" : ""}>
+    <motion.div
+      style={styles}
+      variants={shakeVariants}
+      animate={isIdle ? "shake" : ""}
+    >
       <ThemeContext.Provider value={value}>
         <Routes>
           {/* main content */}
           <Route
             path="/"
             element={
-              <div
-               
-                className="flex justify-center items-center m-auto max-w-[720px]"
-              >
+              <div className="flex justify-center items-center m-auto max-w-[720px]">
                 <div className="shadow m-2 max-w-[720px]">
                   <Aboveall />
                   <Topbar setLevel={setLevel} />

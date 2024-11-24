@@ -3,7 +3,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { FaMobileAlt } from "react-icons/fa";
+import { Fa500Px, FaMobileAlt } from "react-icons/fa";
 
 const CustomCheckbox = ({ setLevel }) => {
   const [selectedLevel, setSelectedLevel] = useState("basic");
@@ -18,8 +18,8 @@ const CustomCheckbox = ({ setLevel }) => {
   const windowWidth = window.innerWidth;
 
   return (
-    <div className="flex flex-row justify-center items-center">
-      <div className="s:pt-2 s:flex-col bg-orange-100">
+    <div className="flex flex-row items-center justify-center">
+      <div className="bg-orange-100 s:pt-2 s:flex-col">
         <div>
           <Box>
             <FormControlLabel
@@ -105,9 +105,11 @@ const CustomCheckbox = ({ setLevel }) => {
           </Box>
         </div>
       </div>
-      <div className="text-3xl relative">
+      <div className="relative text-3xl">
         {/*replace by icons for coresponding size  */}
         {windowWidth > 375 ? <FaMobileAlt /> : null}
+        {windowWidth > 768 ? <faLaptop /> : null}
+        
       </div>
     </div>
   );

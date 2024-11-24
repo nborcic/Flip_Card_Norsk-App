@@ -33,24 +33,23 @@ const Aboveall = () => {
       <div className="flex items-center">
         <img
           src="src/images/icon_navBar_noBack.webp"
-          className="rounded-xl h-[50px] w-[50px]"
+          className="rounded-xl h-[50px] w-[50px] m:hidden l:block s:hidden"
           alt="userIcon"
         />
         {!isAuthenticated ? (
           <IoLogInOutline
-            className="text-3xl cursor-pointer z-10"
+            className="text-3xl cursor-pointer"
             onClick={handleSignIn}
           />
-        ) : null}
-        {isAuthenticated ? (
+        ) : (
           <MdDashboard
-            className="text-3xl cursor-pointer ml-4"
+            className="text-3xl cursor-pointer "
             onClick={() => navigate("/admin")}
           />
-        ) : null}
+        )}
       </div>
 
-      <div className="font-mono font-bold text-xl s:text-s flex flex-row">
+      <div className="flex flex-row font-mono font-bold m:text-xl s:text-s">
         <motion.div animate={{ x: -10 }} style={{ rotate }}>
           Flip
         </motion.div>

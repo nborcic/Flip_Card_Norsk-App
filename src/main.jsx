@@ -12,9 +12,9 @@ import RegisterButBetter from "./components/RegisterButBetter.jsx";
 import ChartLogs from "./components/chartLogs.jsx";
 import PrivateRoute from "./Assets/data/PrivateRoutes.jsx";
 import { AuthProvider } from "./Assets/data/AuthContext.jsx";
-//apon login save tokan in localstorage, if token dashboard, if not login
-// page
-// Define your routes
+// //apon login save tokan in localstorage, if token dashboard, if not login
+// // page
+// // Define your routes
 const router = createBrowserRouter(
   [
     {

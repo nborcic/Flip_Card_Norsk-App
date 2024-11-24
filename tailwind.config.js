@@ -11,10 +11,11 @@ export default {
       },
       screens: {
 
-        's': '319px',
+        "s": "320px",
         'm': '375px',
-        'l': '424px',
-        "xl": "500px",
+        'l': '425px',
+        "xl": "768px",
+
 
       },
 

@@ -1,5 +1,4 @@
 // models/Whitelist.js
-
 import mongoose from 'mongoose';
 import express from 'express';
 import jwt from 'jsonwebtoken';
@@ -7,7 +6,7 @@ import jwt from 'jsonwebtoken';
 const router = express.Router();
 
 // Define the whitelist schema
-const WhitelistSchema = new mongoose.Schema({
+export const WhitelistSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
 });
 const Whitelist = mongoose.model('Whitelist', WhitelistSchema);
@@ -81,4 +80,4 @@ router.delete('/:id', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-export default router;
+export default (router, Whitelist);
