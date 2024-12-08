@@ -8,10 +8,13 @@ import ErrorPage from "./components/ErrorPage.jsx";
 import Register from "./components/Register.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
-import RegisterButBetter from "./components/RegisterButBetter.jsx";
+import RegisterButMaybeBetter from "./components/RegisterButMaybeBetter.jsx";
 import ChartLogs from "./components/chartLogs.jsx";
 import PrivateRoute from "./Assets/data/PrivateRoutes.jsx";
 import { AuthProvider } from "./Assets/data/AuthContext.jsx";
+import EditWords from "./components/EditWords.jsx";
+import "@radix-ui/themes/styles.css";
+
 // //apon login save tokan in localstorage, if token dashboard, if not login
 // // page
 // // Define your routes
@@ -29,7 +32,7 @@ const router = createBrowserRouter(
     },
     {
       path: "/registerButBetter",
-      element: <RegisterButBetter />,
+      element: <RegisterButMaybeBetter />,
       errorElement: <ErrorPage />,
     },
     {
@@ -56,8 +59,17 @@ const router = createBrowserRouter(
       errorElement: <ErrorPage />,
     },
     {
-      path: "/RegisterButBetter",
-      element: <RegisterButBetter />,
+      path: "/admin/editWords/",
+      element: (
+        <PrivateRoute>
+          <EditWords />
+        </PrivateRoute>
+      ),
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/RegisterButMaybeBetter",
+      element: <RegisterButMaybeBetter />,
       errorElement: <ErrorPage />,
     },
     {
@@ -68,7 +80,7 @@ const router = createBrowserRouter(
   ],
   {
     future: {
-      v7_startTransition: true, //v7 optimization for faster rendering, not needed for v6, added 13.11.2024
+      v7_startTransition: true, //v7 optimization , added 13.11.2024
       v7_skipActionErrorRevalidation: true, // Opt-in to skip revalidation after 4xx/5xx action responses, added 15.11.2024
     },
   }
@@ -77,7 +89,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} future={{ v7_partialHydration: true }} />
     </React.StrictMode>
   </AuthProvider>
 );

@@ -17,14 +17,13 @@ export const sendData = async (url, dataToSend, method = "POST") => {
   }
 };
 
-export const getData = async (url, dataToGet, method = "GET") => {
+export const getData = async (url, method = "GET") => {
   try {
     const response = await fetch(url, {
       method: method,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataToGet),
     });
     if (!response.ok) {
       throw new Error("Failed to send data");

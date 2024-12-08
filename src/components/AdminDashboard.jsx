@@ -5,12 +5,19 @@ import DashboardUsers from "./DashboardUsers";
 import { tableStyles } from "../Assets/data/utilsData";
 
 const { tableHeaderStyle, tableRowStyle, tableDataStyle } = tableStyles;
-
+//fix insert new email for whitlisting
+//card style background
+//newWords card style background
+//add new whitelist user
+//fetch and delete users
+//get todo list from https://youtu.be/l134cBAJCuc?feature=shared&t=1149
+//style dashboard
+//replace fetch with functions from util
 const AdminDashboard = () => {
   const loggedAdmin = localStorage.getItem("loggedAdmin");
-  const [makeNewUser, setmakeNewUser] = React.useState("");
+  const [makeNewUser, setMakeNewUser] = useState("");
 
-  const [whiteListedUsers, setwhiteListedUsers] = useState([]);
+  const [whiteListedUsers, setWhiteListedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -41,7 +48,7 @@ const AdminDashboard = () => {
       if (!response.ok) {
         throw new Error("Failed to delete user");
       }
-      setwhiteListedUsers((prevUsers) =>
+      setWhiteListedUsers((prevUsers) =>
         prevUsers.filter((user) => user._id !== id)
       );
     } catch (error) {
@@ -57,13 +64,13 @@ const AdminDashboard = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5050/api/whitelist/add/", {
+      const response = await fetch(`http://localhost:5050/api/whitelist/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ email: makeNewUser }),
+        body: JSON.stringify({ username: makeNewUser }),
       });
 
       if (!response.ok) {
@@ -71,17 +78,22 @@ const AdminDashboard = () => {
       }
 
       const data = await response.json();
-      setwhiteListedUsers((prevUsers) => [...prevUsers, data]);
-      setmakeNewUser("");
+
+      setWhiteListedUsers((prevUsers) => [...prevUsers, data]);
+      setMakeNewUser("");
+      setLoading(false);
     } catch (error) {
       setError(error.message);
-    } finally {
-      setLoading(false);
     }
   };
-
   useEffect(() => {
     const token = localStorage.getItem("token");
+    if (!token) {
+      setError("No token found. Please log in.");
+      setLoading(false);
+      return;
+    }
+
     fetch("http://localhost:5050/api/whitelist", {
       method: "GET",
       headers: {
@@ -91,26 +103,23 @@ const AdminDashboard = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Failed to fetch whitelist");
+          throw new Error("Failed to fetch users");
         }
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        
-        setwhiteListedUsers(data);
+        setWhiteListedUsers(data);
       })
-      .catch((error) => {
-        setError(error.message);
+      .catch((err) => {
+        setError(err.message);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [whiteListedUsers]);
-
+  }, []);
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white  shadow-md rounded-lg p-6 max-w-md w-full">
+    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <Typography
           variant="h4"
           gutterBottom
@@ -133,50 +142,69 @@ const AdminDashboard = () => {
           <Typography
             variant="h5"
             gutterBottom
-            className="text-blue-600  text-center"
+            className="text-center text-blue-600"
           >
             Whitelisted Users
           </Typography>
           <form
             onSubmit={handleNewWhitelistSubmit}
-            className="flex flex-row rounded-md mt-1 mb-1  "
+            className="flex flex-row rounded-md "
           >
             <input
               type="email"
               value={makeNewUser}
-              onChange={(e) => setmakeNewUser(e.target.value)}
+              onChange={(e) => setMakeNewUser(e.target.value)}
               placeholder="Enter email to whitelist"
-              className="border border-gray-400 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              className="border-2 border-gray-200 focus:outline-none focus:border-indigo-400 w-[100%] px-4 rounded-lg m-2 p-2 flex justify-between items-center hover:bg-indigo-100 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50 transition duration-500 ease-in-out h-[60px]"
               required
             />
             <button
               type="submit"
-              className=" bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded ml-2"
+              className="flex items-center justify-between p-2 px-4 m-2 text-white transition duration-500 ease-in-out bg-blue-500 border-2 border-gray-200 rounded-lg  focus:outline-none hover:bg-indigo-100 focus:ring-2 focus:ring-indigo-700 h-15 hover:text-indigo-700 focus:ring-opacity-50 "
             >
-              Add to Whitelist
+              Whitelist
             </button>
           </form>
-          {!loading && (
-            <p className="text-blue-600 text-2xl mt-4 flex justify-center ">
-              Loading...
-            </p>
-          )}
-          <div>
-            <table>
+
+          <div className="user-list">
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                marginTop: "20px",
+              }}
+            >
               <thead>
                 <tr>
+                  <th style={tableHeaderStyle}>Icon</th>
+
                   <th style={tableHeaderStyle}>Email</th>
+                  <th style={tableHeaderStyle}>Admin</th>
                   <th style={tableHeaderStyle}>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {whiteListedUsers.map((white) => (
-                  <tr key={white._id} style={tableRowStyle}>
-                    <td style={tableDataStyle}>{white.email}</td>
+                {whiteListedUsers.map((user) => (
+                  <tr key={user._id} style={tableRowStyle}>
+                    <td style={tableDataStyle}>
+                      {user.userAvatar ? (
+                        <img src="user.userAvatar" alt="Avatar" />
+                      ) : (
+                        <img
+                          href="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                          alt="Avatar"
+                        />
+                      )}
+                    </td>
+
+                    <td style={tableDataStyle}>{user.email}</td>
+                    <td style={tableDataStyle}>
+                      {user.isAdmin ? "Yes" : "No"}
+                    </td>
                     <td
                       style={tableDataStyle}
                       className="cursor-pointer text-red-500"
-                      onClick={() => deleteUser(white._id)}
+                      onClick={() => deleteUser(user._id)}
                     >
                       X
                     </td>
@@ -184,10 +212,14 @@ const AdminDashboard = () => {
                 ))}
               </tbody>
             </table>
+            <h3 className="text-sm text-blue-600">
+              Total Users: {whiteListedUsers.length}
+            </h3>
           </div>
+
           <Typography
             variant="h5"
-            className="text-blue-600 p-4 pb-0 text-center"
+            className="p-4 pb-0 text-center text-blue-600"
           >
             Registered Users
           </Typography>
@@ -195,27 +227,34 @@ const AdminDashboard = () => {
             <DashboardUsers />
           </Typography>
 
-          <div className="gap-2 flex">
+          <div className="flex gap-2">
             <button
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
               onClick={() => navigate("/")}
             >
               {" "}
               Home
             </button>
             <button
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
               onClick={() => handleLogoffActions()}
             >
               {" "}
               Logoff
             </button>
             <button
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
               onClick={() => navigate("/admin/chartLogs")}
             >
               {" "}
               Logs
+            </button>
+            <button
+              className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+              onClick={() => navigate("/admin/editWords")}
+            >
+              {" "}
+              Edit words
             </button>
           </div>
         </div>

@@ -28,7 +28,7 @@ async function getItem(req, res, next) {
 }
 
 // Get all items
-router.get('/', async (res) => {
+router.get('/', async (req, res) => {
     try {
         const words = await Word.find();
         res.json(words);
@@ -38,28 +38,13 @@ router.get('/', async (res) => {
 });
 
 // Get a single item by ID
-router.get('/:id', getItem, (res) => {
+router.get('/:id', getItem, (req, res) => {
     res.json(res.item);
 });
 
-async function getByName(req, res, next) {
-    let name;
-    try {
-        name = await Word.findOne({ name: req.params.name });
-        if (name == null) {
-            return res.status(404).json({ message: 'Cannot find item' });
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message });
-    }
 
-    res.name = name;
-    next();
-}
 
-router.get('/name/:name', getByName, (req, res) => {
-    res.json(res.word);
-});
+
 
 // Create a new word
 router.post('/', async (req, res) => {
@@ -73,6 +58,16 @@ router.post('/', async (req, res) => {
         res.status(201).json(savedWord);
     } catch (err) {
         res.status(400).json({ message: err.message });
+    }
+});
+
+router.delete('/:id', getItem, async (req, res) => {
+
+    try {
+        const item = Word.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Deleted item' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 

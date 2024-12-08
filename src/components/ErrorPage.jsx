@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+  
 const ErrorPage = () => {
   return (
     <div className="text-center flex flex-col gap-5">

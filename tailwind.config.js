@@ -15,11 +15,10 @@ export default {
         'm': '375px',
         'l': '425px',
         "xl": "768px",
-
-
       },
 
-    }
+    },
+    
   },
   plugins: [],
 }

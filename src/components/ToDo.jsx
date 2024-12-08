@@ -63,7 +63,7 @@ function InputList() {
           />
           <button
             type="submit"
-            className="border-2 border-gray-200 focus:outline-none bg-blue-500  px-4 rounded-lg m-2 p-2 flex justify-between items-center hover:bg-indigo-100 focus:ring-2 focus:ring-indigo-700 hover:text-indigo-700 focus:ring-opacity-50 transition duration-500 ease-in-out text-white"
+            className="border-2 border-gray-200 focus:outline-none bg-blue-500  rounded-lg m-2 p-2 w-24 flex justify-between items-center hover:bg-indigo-100 focus:ring-2 focus:ring-indigo-700 hover:text-indigo-700 focus:ring-opacity-50 transition duration-500 ease-in-out text-white"
           >
             Add Item
           </button>

@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
-import path from 'path';
+
 import __dirname from 'path';
-import Whitelist from './whiteList.js';
+import { Whitelist } from './whiteList.js';
 
 const router = express.Router();
 
@@ -115,45 +115,40 @@ async function getUser(req, res, next) {
     res.user = user;
     next();
 }
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const destPath = path.join(__dirname, '../images/');
-        console.log('Multer destination path:', destPath);
-        cb(null, destPath);
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         const destPath = path.join(__dirname, '../images/');
+//         console.log('Multer destination path:', destPath);
+//         cb(null, destPath);
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname);
+//     }
+// });
+
+// const upload = multer({ storage });
+async function userWhitelisted(req, res, next) {
+    const email = req.body.email;
+    const user = await Whitelist.findOne({ email });
+    console.log("Found:", user);
+    if (!user) {
+        return res.status(404).json({ message: 'Email not authorized to registerR' });
     }
-});
+    next();
+}
 
-const upload = multer({ storage });
-
-// Validation Middleware
-router.post('/register', upload.single('avatar'), async (req, res) => {
+router.post('/register', userWhitelisted, async (req, res) => {
     try {
         const { name, email, password } = req.body;
-        const avatarFile = req.file;
-
         // Validate input data
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-        const whitelistd = await Whitelist.findOne({ email });
-        if (!whitelistd) {
-            return res.status(400).json({ message: 'User not whitelisted' });
-        }
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
-
-        const avatarUrl = avatarFile ? `/images/${avatarFile.filename}` : undefined;
         // Create new user instance
         const user = new User({
             name,
             email,
             password,
-            avatar: avatarFile ? avatarUrl : undefined,
         });
 
         // Save user to database

@@ -27,7 +27,10 @@ const CustomCheckbox = ({ setLevel }) => {
                 <Checkbox
                   sx={{
                     "&.Mui-checked": {
-                      color: "blue",
+                      color: "green",
+                    },
+                    ":hover": {
+                      color: "green",
                     },
                   }}
                   checked={selectedLevel === "basic"}
@@ -51,7 +54,10 @@ const CustomCheckbox = ({ setLevel }) => {
                 <Checkbox
                   sx={{
                     "&.Mui-checked": {
-                      color: "green",
+                      color: "orange",
+                    },
+                    ":hover": {
+                      color: "orange",
                     },
                   }}
                   checked={selectedLevel === "intermediate"}
@@ -78,6 +84,9 @@ const CustomCheckbox = ({ setLevel }) => {
                     "&.Mui-checked": {
                       color: "red",
                       flexDirection: "column",
+                    },
+                    ":hover": {
+                      color: "red",
                     },
                   }}
                   checked={selectedLevel === "advanced"}
@@ -109,7 +118,6 @@ const CustomCheckbox = ({ setLevel }) => {
         {/*replace by icons for coresponding size  */}
         {windowWidth > 375 ? <FaMobileAlt /> : null}
         {windowWidth > 768 ? <faLaptop /> : null}
-        
       </div>
     </div>
   );

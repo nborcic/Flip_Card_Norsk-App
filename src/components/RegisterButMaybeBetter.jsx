@@ -11,7 +11,7 @@ export const initialData = {
   password: "",
 };
 
-const RegisterButBetter = () => {
+const RegisterButMaybeBetter = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialData);
 
@@ -254,4 +254,4 @@ const RegisterButBetter = () => {
   );
 };
 
-export default RegisterButBetter;
+export default RegisterButMaybeBetter;

@@ -1,12 +1,11 @@
-// models/Whitelist.js
 import mongoose from 'mongoose';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
-// Define the whitelist schema
-export const WhitelistSchema = new mongoose.Schema({
+
+const WhitelistSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
 });
 const Whitelist = mongoose.model('Whitelist', WhitelistSchema);
@@ -19,7 +18,11 @@ const authenticateToken = (req, res, next) => {
     if (token == null) {
         return res.status(401).send({ error: 'Unauthorized' });
     }
-
+    let blacklistedTokens = ["allowed2@gmail.com"];
+    // token blacklisted?
+    if (blacklistedTokens.includes(token)) {
+        return res.status(403).send({ error: 'Token is blacklisted. Please log in again.' });
+    }
     jwt.verify(token, process.env.MY_SECRET, (err, user) => {
         if (err) {
             return res.status(403).send({ error: 'Forbidden' });
@@ -40,13 +43,12 @@ router.get('/', authenticateToken, async (req, res) => {
 });
 
 // Add a new email to the whitelist
-router.post('/add/', authenticateToken, async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
     const { email } = req.body;
     if (!email) {
         return res.status(400).send({ error: 'Email is required' });
     }
     try {
-        // Check if the email already exists
         const exists = await Whitelist.findOne({ email });
         if (exists) {
             return res.status(400).send({ message: 'Email already in whitelist' });
@@ -60,15 +62,13 @@ router.post('/add/', authenticateToken, async (req, res) => {
     }
 });
 
-// Delete an email from the list of  whitelisted users
+// Delete an email from the whitelist
 router.delete('/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
 
     try {
-        // Find user by ID and delete
         const deletedUser = await Whitelist.findByIdAndDelete(id);
 
-        // If the user doesn't exist, respond with 404
         if (!deletedUser) {
             return res.status(404).json({ message: 'User with that ID not found' });
         }
@@ -80,4 +80,6 @@ router.delete('/:id', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-export default (router, Whitelist);
+
+export default router;
+export { Whitelist };

@@ -1,23 +1,37 @@
 import { React, useState, useEffect, useMemo } from "react";
 import ReactCardFlip from "react-card-flip";
 import flags from "../Assets/data/flags.json";
-import wordData from "../Assets/data/words.json";
 import "./CardX.css";
+import { Scale } from "chart.js";
 
 // eslint-disable-next-line react/prop-types
 const CardX = ({ level }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [words, setWords] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentWord, setCurrentWord] = useState({});
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const levelWords = wordData.levels[level];
-    setWords(levelWords);
-    setCurrentWord(levelWords[0]);
-    setCurrentIndex(0);
-    setLoading(false);
+    fetch("http://localhost:5050/api/words", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        data.map((d) => {
+          const levelWords = d.levels[level];
+          setWords(levelWords);
+          setCurrentWord(levelWords[0]);
+          setCurrentIndex(0);
+          setLoading(false);
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, [level]);
 
   const handleFlip = () => {
@@ -29,6 +43,10 @@ const CardX = ({ level }) => {
       const newIndex = currentIndex - 1;
       setCurrentIndex(newIndex);
       setCurrentWord(words[newIndex]);
+    } else {
+      const newIndex = words.length - 1;
+      setCurrentIndex(newIndex);
+      setCurrentWord(words[newIndex]);
     }
   };
 
@@ -37,23 +55,22 @@ const CardX = ({ level }) => {
       const newIndex = currentIndex + 1;
       setCurrentIndex(newIndex);
       setCurrentWord(words[newIndex]);
+    } else {
+      const newIndex = 0;
+      setCurrentIndex(newIndex);
+      setCurrentWord(words[newIndex]);
     }
   };
+  useEffect(() => {});
 
-  // //position theme button
-  // //min size of cardx
-  // //after 3 secs of inactivity, flip card animation icon starts
   //button for explanation trip over page using toast , and timing so function is triggered and toast ae timed to be shown at exsact time
   //images of phone, tablet, desktop depending ona a display size
-  // //sign in button
-  // //login page, routing, sign up,
-  // //form for adding more words in the app
 
   return loading ? (
     <div className="flex justify-center items-center bg-sky-100  h-[30vh] min-h-80 border border-black">
       <button
         type="button"
-        className="px-4 py-2 font-bold text-black bg-transparent bg-indigo-100 rounded-full"
+        className="font-bold text-black bg-transparent bg-indigo-100 rounded-full"
         disabled
       >
         <svg className="animate-spin h-15 w-15 mr-13 " viewBox="00 0 24 24">
@@ -75,10 +92,12 @@ const CardX = ({ level }) => {
       </button>
     </div>
   ) : (
-    <div className="rounded flex justify-center items-center bg-sky-100   h-[30vh] min-h-[375px] m-w-[320px] border border-black">
-      <div className="flex flex-row items-center w-[100%] h-[100%] border border-black">
+    <div className=" rounded flex justify-center items-center bg-sky-100   h-[30vh] min-h-[375px] min-w-[320px] border border-black">
+      <div className="flex flex-row items-center w-[100%] h-[100%] border border-black p-2">
         <div
-          className="PREVIOUS WORD [writing-mode:vertical-rl] rotate-180 border font-bold rounded h-[100%] flex justify-center cursor-pointer  xl:h-[80%] xl:p-8 xl:text-2xl border-black l:h-[80%] m:h-[100%] m:w-[20%] l:p-4 l:text-xl m:p-4 m:text-xl bg-amber-100 w-[20%] s:w-[20%] s:h-[90%]"
+          className="PREVIOUS WORD [writing-mode:vertical-rl] rotate-180 border font-bold rounded h-[100%] flex justify-center cursor-pointer  xl:h-[80%] xl:p-8 xl:text-2xl border-black l:h-[80%] m:h-[100%] m:w-[20%] l:p-4 l:text-xl m:p-4 m:text-xl bg-amber-100 w-[20%] s:w-[20%] s:h-[90%]
+          hover:scale-105
+          "
           onClick={handlePrevious}
         >
           <span className="font-bold previous_div ">˄</span>
@@ -87,12 +106,10 @@ const CardX = ({ level }) => {
         <div className="w-[100%] s:m-w-[320px] ">
           <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
             <div
-              className="card text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300 h-[30vh] m-w-[320px] w-[100%] 
-             
-            "
+              className="card text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300   w-[100%]"
               onClick={handleFlip}
             >
-              <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:w-[20vw]">
+              <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:h-[100%] xl:w-[100%]">
                 English
               </h1>
 
@@ -101,7 +118,7 @@ const CardX = ({ level }) => {
                   level === "advanced" || level === "intermediate"
                     ? "text-2xl"
                     : "text-4xl"
-                }   font-mono font-extrabold pt-4 pb-4 p-0 m-0 text-xl justify-center items-center  `}
+                }   font-mono font-extrabold pt-4 pb-4 text-2xl justify-center items-center  `}
               >
                 {currentWord.word}
               </p>
@@ -113,21 +130,19 @@ const CardX = ({ level }) => {
               />
             </div>
             <div
-              className="card text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300 h-[30vh] m-w-[320px] w-[100%]
-             
-            "
+              className="card text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300 w-[100%]"
               onClick={handleFlip}
             >
-              <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:w-[20vw]">
+              <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:h-[100%] xl:w-[100%]">
                 Norsk
               </h1>
 
               <p
-                className={`  xl:${
+                className={` ${
                   level === "advanced" || level === "intermediate"
-                    ? "text-lg"
+                    ? "text-2xl"
                     : "text-4xl"
-                }   font-mono font-extrabold pt-4 pb-4 p-0 m-0   justify-center items-center  `}
+                }   font-mono font-extrabold pt-4 pb-4 p-0 m-0  text-2xl justify-center items-center  `}
               >
                 {currentWord.translation}
               </p>
@@ -142,7 +157,7 @@ const CardX = ({ level }) => {
         </div>
 
         <div
-          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] flex justify-center cursor-pointer  xl:h-[80%] border-black l:h-[80%] m:h-[100%] m:w-[20%] m:p-4 m:text-xl bg-amber-100 w-[20%] s:w-[20%] s:h-[90%] xl:p-8 xl:text-2xl l:p-4 l:text-xl"
+          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] flex justify-center cursor-pointer xl:h-[80%] border-black l:h-[80%] m:h-[100%] m:w-[20%] m:p-4 m:text-xl bg-amber-100 w-[20%] s:w-[20%] s:h-[90%] xl:p-8 xl:text-2xl l:p-4 l:text-xl hover:scale-105"
           onClick={handleNext}
         >
           Next word <span className="font-bold">˄</span>

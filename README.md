@@ -1,15 +1,56 @@
-The Flip Card Norsk App is a React-based app that helps you learn Norwegian through interactive flashcards.
+Flip Card Norsk App 🎴🇳🇴
+Learn Norwegian the Fun and Interactive Way!
+Welcome to Flip Card Norsk App, a React-based application designed to make learning Norwegian enjoyable and efficient. With an engaging flashcard system and intuitive features, you can master Norwegian words and phrases at your own pace. App made especially for quick self-testing in language knowledge, perfect for those on-the-go situations and when you're short on time. 
+________________________________________
+✨ Key Features
+📚 Interactive Flashcard Mechanism
+•	Flip between Norwegian words/phrases and their English equivalents with a simple tap.
+•	Each card operates as its own component, leveraging React’s state management for smooth flipping and tracking progress.
+🔐 User Authentication & Dashboard (In Progress)
+•	Sign up, log in, card management.
+•	Future updates will include detailed performance stats to help you measure your success.
+🧠 Engaging Learning Experience
+•	Gamified elements keep you motivated, making the learning process both fun and effective.
+    🌐 Backend Integration
+•	Built on the MERN Stack (MongoDB, Express, React, Node.js) for a robust and scalable experience.
+•	Backend functionalities include user session management, data storage, and progress tracking (in development).
+________________________________________
+🛠️ Tech Stack
+Frontend:
+•	React.js
+•	React Hooks 
+•	Tailwind CSS
+Backend:
+•	Node.js
+•	Express.js
+•	MongoDB
+Authentication:
+•	bcrypt.js & JWT (JSON Web Tokens)
+________________________________________
+🚀 Getting Started
+1. Clone the Repository
+git clone https://github.com/nborcic/flip_card_norsk.git
 
+2. Install Dependencies
+bash
+Copy code
+npm install
+3. Run the Development Server
 
-Key Features:
-Flashcard Mechanism: The main feature is the “flip card” system where users can switch between the Norwegian word or phrase and its English equivalent. 
+npm run dev
+The app will be available at http://localhost:3000.
+________________________________________
+🏗️ Future Enhancements
+•	Admin Features: Card and user management.
+________________________________________
+🌟 Contributing
+We welcome contributions! Feel free to submit issues or pull requests to help us improve Flip Card Norsk App.
+________________________________________
+📧 Contact
+For questions or suggestions, reach out via email or open an issue on GitHub.
+________________________________________
+📝 License
+This project is licensed under the MIT License.
+________________________________________
+With Flip Card Norsk App, learning Norwegian is just a flip away. Start your journey today and see how fun language learning can be! 🌍✨
 
-The app uses React’s component-based setup. Each card works as its own component, using state management for the flipping action and keeping track of user progress. React hooks, useState, and useEffect, are used to manage the app's dynamic features.
-
-Tailwind CSS for Styling: Responsive design comes from Tailwind CSS, giving it a modern and user-friendly vibe. 
-
-User Authentication and Dashboard: A key feature in the works is a dashboard login system, letting users sign up, log in, and keep track of their progress*. 
-
-Interactive Learning Experience: The app creates an engaging and user-focused learning atmosphere. By flipping through cards, users can actively interact with the material. This engagement can get an extra boost from gamified elements, which help keep motivation up and track progress.
-
-Backend Integration (MERN Stack): While the current version focuses on front-end functionalities, the app connect with a backend system (using Express and MongoDB) to store user data, track learning progress*, and support user sessions* via a login system.
