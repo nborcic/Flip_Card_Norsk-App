@@ -23,4 +23,4 @@ dist-ssr
 .env
 *.sln
 *.sw?   
-client_secret.jsonGOOGLE_DRIVE_API
+backend
