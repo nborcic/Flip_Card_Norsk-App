@@ -106,7 +106,7 @@ const CardX = ({ level }) => {
         <div className="w-[100%] s:m-w-[320px] ">
           <ReactCardFlip flipDirection="horizontal" isFlipped={isFlipped}>
             <div
-              className="card text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300   w-[100%]"
+              className="card bg-sky-100  p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300   w-[100%]"
               onClick={handleFlip}
             >
               <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:h-[100%] xl:w-[100%]">
@@ -130,7 +130,7 @@ const CardX = ({ level }) => {
               />
             </div>
             <div
-              className="card text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300 w-[100%]"
+              className="card bg-sky-100 text-orange p-6 rounded flex flex-col items-center justify-center l:w-[100%] l:h-[80%]  m:w-[50vw] m:h-[80%] text-orange-300 w-[100%]"
               onClick={handleFlip}
             >
               <h1 className="text-lg text-black font-anton m:text-xl m:w-[30vw] xl:text-2xl xl:h-[100%] xl:w-[100%]">
@@ -157,7 +157,7 @@ const CardX = ({ level }) => {
         </div>
 
         <div
-          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] flex justify-center cursor-pointer xl:h-[80%] border-black l:h-[80%] m:h-[100%] m:w-[20%] m:p-4 m:text-xl bg-amber-100 w-[20%] s:w-[20%] s:h-[90%] xl:p-8 xl:text-2xl l:p-4 l:text-xl hover:scale-105"
+          className="NEXT WORD [writing-mode:vertical-lr] border font-bold rounded h-[100%] flex justify-center cursor-pointer xl:h-[80%] border-black l:h-[80%] m:h-[100%] m:w-[20%] m:p-4 m:text-xl bg-amber-100 w-[20%] s:w-[20%] s:h-[90%] xl:p-8 xl:text-2xl l:p-4 l:text-xl hover:scale-105 "
           onClick={handleNext}
         >
           Next word <span className="font-bold">˄</span>
