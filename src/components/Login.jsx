@@ -35,7 +35,7 @@ const Login = () => {
           localStorage.setItem("token", data.token);
           //console.log("Token:", data.token); //Testing token
           localStorage.setItem("loggedAdmin", data.name);
-          navigate("/admin");
+          navigate("/");
         } else {
           alert("Login failed");
         }
