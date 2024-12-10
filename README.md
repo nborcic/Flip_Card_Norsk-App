@@ -55,3 +55,4 @@ ________________________________________
 With Flip Card Norsk App, learning Norwegian is just a flip away. Start your journey today and see how fun language learning can be! 🌍✨
 
 # flip-card-frontend
+# flip-card-frontend
