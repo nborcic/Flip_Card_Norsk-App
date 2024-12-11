@@ -13,7 +13,7 @@ const CardX = ({ level }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5050/api/words", {
+    fetch("https://6759cd91c2920412bed41cab--flip-card-s.netlify.app/api/words", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
