@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Icon } from "@iconify/react";
 
 function InputList() {
   let initialItems = [
@@ -81,10 +80,10 @@ function InputList() {
                   <button
                     type="button"
                     id="lineOverMe"
-                    className="text-white w-10 p-2 bg-blue-500 hover:bg-blue-700 rounded-md"
+                    className="text-white p-2  bg-blue-500 hover:bg-blue-700 rounded-md"
                     onClick={() => lineOverMe(id)}
                   >
-                    <Icon icon="mdi:done" className="w-6 h-6 m-0 p-0 " />
+                    Done
                   </button>
                   <button
                     type="button"
@@ -92,10 +91,7 @@ function InputList() {
                     className="text-white w-10 p-2 bg-blue-500 hover:bg-blue-700 rounded-md"
                     onClick={() => deleteMe(id)}
                   >
-                    <Icon
-                      icon="mdi:delete-outline"
-                      className="w-6 h-6 m-0 p-0 "
-                    />
+                    X
                   </button>
                 </div>
               </li>
