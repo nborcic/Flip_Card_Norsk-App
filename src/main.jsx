@@ -9,7 +9,7 @@ import Register from "./components/Register.jsx";
 import UpdateCards from "./components/UpdateCards.jsx";
 import AdminDashboard from "./components/AdminDashboard.jsx";
 import RegisterButMaybeBetter from "./components/RegisterButMaybeBetter.jsx";
-import ChartLogs from "./components/chartLogs.jsx";
+import ChartLogs from "./components/ChartLogs.jsx";
 import PrivateRoute from "./Assets/data/PrivateRoutes.jsx";
 import { AuthProvider } from "./Assets/data/AuthContext.jsx";
 import EditWords from "./components/EditWords.jsx";
